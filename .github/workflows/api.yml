@@ -12,7 +12,6 @@ jobs:
         uses: php-actions/composer@v6
         with:
           php_version: "8.1"
-          path: "./api/composer.json"
 
       - name: PHPStan Static Analysis
         uses: php-actions/phpstan@v3
