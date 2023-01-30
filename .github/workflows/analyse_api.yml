@@ -31,7 +31,7 @@ jobs:
         uses: php-actions/phpstan@v3
         with:
           path: "./api/src/"
-          configuration: "api/phpstan.neon"
+          configuration: "./api/phpstan.neon"
           memory_limit: 2048M
           level: max
           php_version: "8.1"
