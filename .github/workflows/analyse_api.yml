@@ -24,7 +24,7 @@ jobs:
         uses: "shivammathur/setup-php@v2"
         with:
           php-version: "${{ matrix.php }}"
-          extensions: "dom, curl, libxml, mbstring, zip, fileinfo"
+          extensions: "GD, intl, fileinfo"
           tools: "composer:v2"
           coverage: "none"
 
@@ -33,9 +33,6 @@ jobs:
 
       - name: "Validate composer"
         run: "composer validate --strict --working-dir=./api/"
-
-      - name: "Install dependencies from composer.json"
-        run: "composer update --with='laravel/framework:${{ matrix.laravel }}' --no-interaction --no-progress --working-dir=./api/"
 
       - name: "Require PHPStan dev version"
         run: "composer require phpstan/phpstan:@dev --no-update --no-interaction --no-progress --working-dir=./api/"
