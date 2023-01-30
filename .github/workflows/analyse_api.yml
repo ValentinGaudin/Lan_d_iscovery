@@ -1,9 +1,7 @@
 name: CI
 
-on: [push]
+on: [ push ]
 
-pull_request:
-    branches: [ "develop" ]
 
 env:
   DAY_OF_WEEK: Monday
