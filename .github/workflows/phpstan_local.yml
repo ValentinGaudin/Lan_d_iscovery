@@ -37,5 +37,4 @@ jobs:
           path: "./api"
           php_version: "${{ matrix.php }}"
           level: max
-          autoload_file: "./api/vendor"
           configuration: "./api/phpstan.neon"
