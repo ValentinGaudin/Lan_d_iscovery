@@ -32,4 +32,10 @@ jobs:
         run: "composer update --with='laravel/framework:${{ matrix.laravel }}' --no-interaction --no-progress --working-dir=./api/"
 
       - name: "Execute static analysis"
-        run: "composer run-script test:types --working-dir=./api/"
+      - uses: php-actions/phpstan@v3
+        with:
+        path: "./api"
+        php_version: "${{ matrix.php }}"
+        level: max
+        autoload_file: "./api/vendor"
+        configuration: "./api/phpstan.neon"
