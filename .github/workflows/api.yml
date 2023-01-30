@@ -8,11 +8,17 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
+      - name: Install dependencies
+        uses: php-actions/composer@v6
+        with:
+          php_version: "8.1"
+          path: "./api/composer.json"
+
       - name: PHPStan Static Analysis
         uses: php-actions/phpstan@v3
         with:
-          path: ./api/src/
-          configuration: api/phpstan.neon
+          path: "./api/src/"
+          configuration: "api/phpstan.neon"
           memory_limit: 2048M
           level: max
-          php_version: 8.1
+          php_version: "8.1"
