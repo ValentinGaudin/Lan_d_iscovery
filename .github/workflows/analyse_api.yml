@@ -2,8 +2,14 @@ name: CI
 
 on: [push]
 
+pull_request:
+    branches: [ "develop" ]
+
+env:
+  DAY_OF_WEEK: Monday
+
 jobs:
-  phpstan:
+  analyse_api:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
@@ -17,7 +23,7 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-php-
 
-      - name: Validate composer.json and composer.lock
+      - name: Validate composer
         run: composer validate --strict --working-dir=./api/
 
       - name: Install dependencies
