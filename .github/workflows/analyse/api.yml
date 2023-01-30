@@ -1,0 +1,40 @@
+name: analyse_api
+on: [push]
+jobs:
+  build-test:
+    name: PHPStan Static Analysis
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: php-actions/composer@v6 # or alternative dependency management
+      - uses: php-actions/phpstan@v3
+        with:
+          configuration: api/phpstan.neon
+          memory_limit: 2048M
+          level: max
+          php_version: 8.1
+
+#
+#    services:
+#      - mysql:8.0
+#    cache:
+#      paths:
+#        - api/vendor
+#        - $HOME/.composer
+#    before_script:
+#      - cd platform
+#      - composer config http-basic.nova.laravel.com ${NOVA_USERNAME} ${NOVA_LICENSE_KEY}
+#      - cp ../ci/scripts/platform.sh install.sh
+#      - sh install.sh
+#    script:
+#      - composer phpstan
+#      - composer phpcs
+#      - composer run-script --timeout=600 phpunit
+#    variables:
+#      PHP_INI_MEMORY_LIMIT: 2g
+#      PHP_EXTENSION_GD: 1
+#      PHP_EXTENSION_XDEBUG: 1
+#      PHP_EXTENSION_INTL: 1
+#      DB_HOST: mysql
+#      APP_ENV: local
+#
