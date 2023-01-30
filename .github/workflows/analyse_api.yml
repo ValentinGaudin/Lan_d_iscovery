@@ -28,6 +28,9 @@ jobs:
           tools: "composer:v2"
           coverage: "none"
 
+      - name: "Install composer.json"
+        run: "composer install --working-dir=./api/"
+
       - name: "Validate composer"
         run: "composer validate --strict --working-dir=./api/"
 
@@ -36,9 +39,6 @@ jobs:
 
       - name: "Require PHPStan dev version"
         run: "composer require phpstan/phpstan:@dev --no-update --no-interaction --no-progress --working-dir=./api/"
-
-      - name: "Require Larastan"
-        run: "composer require nunomaduro/larastan:^2.0 --dev --no-update --no-interaction --no-progress --working-dir=./api/"
 
       - name: "Execute static analysis"
         uses: "php-actions/phpstan@v3"
