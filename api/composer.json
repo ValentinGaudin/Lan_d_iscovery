@@ -51,6 +51,7 @@
             "@php artisan key:generate --ansi"
         ],
         "test:types": "phpstan analyse --ansi -c ./phpstan.neon --memory-limit=2048m",
+        "test:linter": "phpcs ",
         "test:unit": "phpunit --colors=always -d memory_limit=1280M",
         "test": [
             "@test:types",

@@ -29,13 +29,16 @@ jobs:
           coverage: "none"
 
       - name: "Install composer.json"
-        run: "composer install --working-dir=./api/"
+        run: "composer install --working-dir=$WORKING_DIR_API"
 
       - name: "Validate composer"
-        run: "composer validate --strict --working-dir=./api/"
+        run: "composer validate --strict --working-dir=$WORKING_DIR_API"
 
       - name: "Require PHPStan dev version"
-        run: "composer require phpstan/phpstan:@dev --no-update --no-interaction --no-progress --working-dir=./api/"
+        run: "composer require phpstan/phpstan:@dev --no-update --no-interaction --no-progress --working-dir=$WORKING_DIR_API"
 
       - name: "Execute static analysis"
-        run: "composer run-script test:types --working-dir=./api/"
+        run: "composer run-script test:types --working-dir=$WORKING_DIR_API"
+
+      - name: "Execute linter analysis"
+        run: "composer run-script test:linter --working-dir=$WORKING_DIR_API"
