@@ -33,3 +33,17 @@ jobs:
 
       - name: "Install dependencies from composer.json"
         run: "composer update --with='laravel/framework:${{ matrix.laravel }}' --no-interaction --no-progress --working-dir=./api/"
+
+      - name: "Require PHPStan dev version"
+        run: "composer require phpstan/phpstan:@dev --no-update --no-interaction --no-progress --working-dir=./api/"
+
+      - name: "Require Larastan"
+        run: "composer require nunomaduro/larastan:^2.0 --dev --no-update --no-interaction --no-progress --working-dir=./api/"
+
+      - name: "Execute static analysis"
+        uses: "php-actions/phpstan@v3"
+        with:
+          path: "./api"
+          php_version: "${{ matrix.php }}"
+          level: max
+          configuration: "./api/phpstan.neon"
