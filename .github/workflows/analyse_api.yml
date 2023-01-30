@@ -30,7 +30,7 @@ jobs:
       - name: PHPStan Static Analysis
         uses: php-actions/phpstan@v3
         with:
-          path: "./api/src/"
+          path: "./api/"
           configuration: "./api/phpstan.neon"
           memory_limit: 2048M
           level: max
