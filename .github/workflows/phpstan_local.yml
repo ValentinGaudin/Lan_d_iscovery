@@ -34,8 +34,8 @@ jobs:
       - name: "Execute static analysis"
         uses: "php-actions/phpstan@v3"
         with:
-        path: "./api"
-        php_version: "${{ matrix.php }}"
-        level: max
-        autoload_file: "./api/vendor"
-        configuration: "./api/phpstan.neon"
+          path: "./api"
+          php_version: "${{ matrix.php }}"
+          level: max
+          autoload_file: "./api/vendor"
+          configuration: "./api/phpstan.neon"
