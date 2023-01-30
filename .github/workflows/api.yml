@@ -18,7 +18,7 @@ jobs:
             ${{ runner.os }}-php-
 
       - name: Validate composer.json and composer.lock
-        run: composer validate --strict
+        run: composer validate --strict --working-dir=./api/
 
       - name: Install dependencies
         run: composer install --prefer-dist --no-progress --working-dir=./api/
