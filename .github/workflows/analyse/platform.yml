@@ -1,49 +1,37 @@
 name: CI
-on:
-  push:
-    branches: [ main ]
+on: [push]
 jobs:
-  analyse_platform:
-    if: contains( github.ref, 'main')
-    runs-on: ubuntu-latest
-    container:
-      image: thecodingmachine/php:8.1-v4-apache-node16
-      env:
-        NODE_ENV: development
-      ports:
-        - 443:443
-        - 80:80
-    steps:
-      - name: Check for dockerenv file
-        run: (ls /.dockerenv && echo Found dockerenv) || (echo No dockerenv)
+  analyse_api:
+    - runs-on: ubuntu-latest
+    - name: analyse api
+      uses: php-actions/phpstan@v3
+      with:
+        configuration: api/phpstan.neon
+        memory_limit: 2048M
+        level: max
+        php_version: 8.1
 
-
-    stage: analyse
-
-
-
-
-
-    services:
-      - mysql:8.0
-    cache:
-      paths:
-        - api/vendor
-        - $HOME/.composer
-    before_script:
-      - cd platform
-      - composer config http-basic.nova.laravel.com ${NOVA_USERNAME} ${NOVA_LICENSE_KEY}
-      - cp ../ci/scripts/platform.sh install.sh
-      - sh install.sh
-    script:
-      - composer phpstan
-      - composer phpcs
-      - composer run-script --timeout=600 phpunit
-    variables:
-      PHP_INI_MEMORY_LIMIT: 2g
-      PHP_EXTENSION_GD: 1
-      PHP_EXTENSION_XDEBUG: 1
-      PHP_EXTENSION_INTL: 1
-      DB_HOST: mysql
-      APP_ENV: local
-
+#
+#    services:
+#      - mysql:8.0
+#    cache:
+#      paths:
+#        - api/vendor
+#        - $HOME/.composer
+#    before_script:
+#      - cd platform
+#      - composer config http-basic.nova.laravel.com ${NOVA_USERNAME} ${NOVA_LICENSE_KEY}
+#      - cp ../ci/scripts/platform.sh install.sh
+#      - sh install.sh
+#    script:
+#      - composer phpstan
+#      - composer phpcs
+#      - composer run-script --timeout=600 phpunit
+#    variables:
+#      PHP_INI_MEMORY_LIMIT: 2g
+#      PHP_EXTENSION_GD: 1
+#      PHP_EXTENSION_XDEBUG: 1
+#      PHP_EXTENSION_INTL: 1
+#      DB_HOST: mysql
+#      APP_ENV: local
+#
