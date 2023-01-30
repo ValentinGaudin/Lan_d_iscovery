@@ -8,10 +8,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-      - name: Install dependencies
-        uses: php-actions/composer@v6
-        with:
-          php_version: "8.1"
+
 
       - name: Cache Composer packages
         id: composer-cache
@@ -27,6 +24,8 @@ jobs:
 
       - name: Install dependencies
         run: composer install --prefer-dist --no-progress --working-dir=./api/
+        with:
+          php_version: "8.1"
 
       - name: PHPStan Static Analysis
         uses: php-actions/phpstan@v3
