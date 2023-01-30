@@ -3,7 +3,7 @@ name: "Static Analysis"
 on: [ push ]
 
 env:
-  DAY_OF_WEEK: Monday
+  WORKING_DIR_API: "./api/"
 
 jobs:
   analyse_api:
@@ -41,9 +41,4 @@ jobs:
         run: "composer require phpstan/phpstan:@dev --no-update --no-interaction --no-progress --working-dir=./api/"
 
       - name: "Execute static analysis"
-        uses: "php-actions/phpstan@v3"
-        with:
-          path: "./api"
-          php_version: "${{ matrix.php }}"
-          level: max
-          configuration: "./api/phpstan.neon"
+        run: "composer run-script test:types --working-dir=./api/"
