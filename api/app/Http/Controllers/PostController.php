@@ -13,9 +13,9 @@ class PostController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return Response
+     * @return void
      */
-    public function index()
+    public function index(): void
     {
         //
     }
@@ -24,9 +24,9 @@ class PostController extends Controller
      * Store a newly created resource in storage.
      *
      * @param StorePostRequest $request
-     * @return Response
+     * @return void
      */
-    public function store(StorePostRequest $request)
+    public function store(StorePostRequest $request): void
     {
         //
     }
@@ -37,7 +37,7 @@ class PostController extends Controller
      * @param Post $post
      * @return PostResource
      */
-    public function show(Post $post)
+    public function show(Post $post): PostResource
     {
         return new PostResource($post);
     }
@@ -47,9 +47,9 @@ class PostController extends Controller
      *
      * @param UpdatePostRequest $request
      * @param Post              $post
-     * @return Response
+     * @return void
      */
-    public function update(UpdatePostRequest $request, Post $post)
+    public function update(UpdatePostRequest $request, Post $post): void
     {
         //
     }
@@ -58,9 +58,9 @@ class PostController extends Controller
      * Remove the specified resource from storage.
      *
      * @param Post $post
-     * @return Response
+     * @return void
      */
-    public function destroy(Post $post)
+    public function destroy(Post $post): void
     {
         //
     }
