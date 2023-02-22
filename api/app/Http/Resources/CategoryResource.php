@@ -13,7 +13,7 @@ class CategoryResource extends JsonResource
      * Transform the resource into an array.
      *
      * @param  Request  $request
-     * @return array<int, string>|Arrayable|JsonSerializable
+     * @return array<int, string>|Arrayable<int, string>|JsonSerializable
      */
     public function toArray($request): array|JsonSerializable|Arrayable
     {

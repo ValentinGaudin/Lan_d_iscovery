@@ -1,6 +1,6 @@
 services:
   api:
-    image: thecodingmachine/php:8.1-v4-apache-node16
+    image: thecodingmachine/php:8.1-v4-apache-node18
     environment:
       # PHP EXTENSIONS
       PHP_EXTENSION_GD: 1

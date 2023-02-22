@@ -22,7 +22,7 @@ class PostResource extends JsonResource
      * Transform the resource into an array.
      *
      * @param  Request  $request
-     * @return array<string, int|string|Carbon>|Arrayable|JsonSerializable
+     * @return array<string, int|string|Carbon>|Arrayable<string, int|string|Carbon>|JsonSerializable
      */
     public function toArray($request): array|JsonSerializable|Arrayable
     {

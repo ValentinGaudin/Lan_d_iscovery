@@ -1,0 +1,3 @@
+services:
+  database:
+    platform: linux/amd64
