@@ -4,15 +4,16 @@ namespace App\Http\Controllers;
 
 use App\Models\Trick;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 
 class TrickController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return void
      */
-    public function index()
+    public function index(): void
     {
         //
     }
@@ -20,9 +21,9 @@ class TrickController extends Controller
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return void
      */
-    public function create()
+    public function create(): void
     {
         //
     }
@@ -30,10 +31,11 @@ class TrickController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @param Request $request
+     *
+     * @return void
      */
-    public function store(Request $request)
+    public function store(Request $request): void
     {
         //
     }
@@ -41,10 +43,11 @@ class TrickController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Trick  $trick
-     * @return \Illuminate\Http\Response
+     * @param Trick $trick
+     *
+     * @return void
      */
-    public function show(Trick $trick)
+    public function show(Trick $trick): void
     {
         //
     }
@@ -52,10 +55,11 @@ class TrickController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Trick  $trick
-     * @return \Illuminate\Http\Response
+     * @param Trick $trick
+     *
+     * @return void
      */
-    public function edit(Trick $trick)
+    public function edit(Trick $trick): void
     {
         //
     }
@@ -63,11 +67,12 @@ class TrickController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Trick  $trick
-     * @return \Illuminate\Http\Response
+     * @param Request $request
+     * @param Trick   $trick
+     *
+     * @return void
      */
-    public function update(Request $request, Trick $trick)
+    public function update(Request $request, Trick $trick): void
     {
         //
     }
@@ -75,10 +80,11 @@ class TrickController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Trick  $trick
-     * @return \Illuminate\Http\Response
+     * @param  Trick  $trick
+     *
+     * @return void
      */
-    public function destroy(Trick $trick)
+    public function destroy(Trick $trick): void
     {
         //
     }

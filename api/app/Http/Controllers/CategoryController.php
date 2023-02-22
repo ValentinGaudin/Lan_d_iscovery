@@ -12,9 +12,9 @@ class CategoryController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return Response
+     * @return void
      */
-    public function index()
+    public function index(): void
     {
         //
     }
@@ -23,9 +23,9 @@ class CategoryController extends Controller
      * Store a newly created resource in storage.
      *
      * @param StoreCategoryRequest $request
-     * @return Response
+     * @return void
      */
-    public function store(StoreCategoryRequest $request)
+    public function store(StoreCategoryRequest $request): void
     {
         //
     }
@@ -34,9 +34,9 @@ class CategoryController extends Controller
      * Display the specified resource.
      *
      * @param Category $category
-     * @return Response
+     * @return void
      */
-    public function show(Category $category)
+    public function show(Category $category): void
     {
         //
     }
@@ -46,9 +46,9 @@ class CategoryController extends Controller
      *
      * @param UpdateCategoryRequest $request
      * @param Category              $category
-     * @return Response
+     * @return void
      */
-    public function update(UpdateCategoryRequest $request, Category $category)
+    public function update(UpdateCategoryRequest $request, Category $category): void
     {
         //
     }
@@ -57,9 +57,9 @@ class CategoryController extends Controller
      * Remove the specified resource from storage.
      *
      * @param Category $category
-     * @return Response
+     * @return void
      */
-    public function destroy(Category $category)
+    public function destroy(Category $category): void
     {
         //
     }
