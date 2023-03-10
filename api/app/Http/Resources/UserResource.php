@@ -9,14 +9,17 @@ use Illuminate\Http\Resources\Json\JsonResource;
 use JsonSerializable;
 
 /**
- * App\Models\Post
+ * App\Models\User
  *
- * @property int $id
- * @property string $title
- * @property string $description
+ * @property int    $id
+ * @property string $civility
+ * @property string $first_name
+ * @property string $last_name
+ * @property string $full_name
+ * @property string $email
  * @property Carbon $created_at
-*/
-class PostResource extends JsonResource
+ */
+class UserResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -27,10 +30,12 @@ class PostResource extends JsonResource
     public function toArray($request): array|JsonSerializable|Arrayable
     {
         return [
-            'id'          => $this->id,
-            'title'       => $this->title,
-            'description' => $this->description,
-            'created_at'  => $this->created_at,
+            'id'         => $this->id,
+            'first_name' => $this->first_name,
+            'last_name'  => $this->last_name,
+            'full_name'  => $this->fullName,
+            'email'      => $this->email,
+            'created_at' => $this->created_at,
         ];
     }
 }

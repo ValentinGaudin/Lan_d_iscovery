@@ -1,6 +1,6 @@
 services:
   api:
-    image: thecodingmachine/php:8.1-v4-apache-node18
+    image: thecodingmachine/php:8.2-v4-apache
     environment:
       # PHP EXTENSIONS
       PHP_EXTENSION_GD: 1
@@ -11,6 +11,7 @@ services:
       APP_ENV: ${ENV}
       APP_DEBUG: ${DEBUG}
       APP_URL: ${HTTP_PROTOCOL}://${DOMAIN}
+      IP_ADDRESS: ${IP_ADDRESS}
       HTTP_PROTOCOL: ${HTTP_PROTOCOL}
       SANCTUM_STATEFUL_DOMAINS: ${SANCTUM_STATEFUL_DOMAINS}
       CORS_ALLOWED_ORIGINS: ${CORS_ALLOWED_ORIGINS}
@@ -22,7 +23,6 @@ services:
       DB_HOST: ${DB_HOST}
       DEFAULT_USERNAME: ${DEFAULT_USERNAME}
       DEFAULT_PASSWORD: ${DATABASE_ROOT_PASSWORD}
-
       # EMAILING
       MAIL_USERNAME: ${MAIL_USERNAME}
       MAIL_PASSWORD: ${MAIL_PASSWORD}
@@ -33,6 +33,14 @@ services:
       MAIL_FROM_ADDRESS: ${MAIL_FROM_ADDRESS}
       MAIL_FROM_NAME: ${MAIL_FROM_NAME}
       MAIL_VERIFY_PEER: ${MAIL_VERIFY_PEER}
+      # GOOGLE
+      VITE_GOOGLE_CLIENT_ID: ${VITE_GOOGLE_CLIENT_ID}
+      VITE_GOOGLE_CLIENT_SECRET: ${VITE_GOOGLE_CLIENT_SECRET}
+      VITE_GOOGLE_REDIRECT_URI: ${VITE_GOOGLE_REDIRECT_URI}
+      # GITHUB
+      VITE_GITHUB_CLIENT_ID: ${VITE_GITHUB_CLIENT_ID}
+      VITE_GITHUB_CLIENT_SECRET: ${VITE_GITHUB_CLIENT_SECRET}
+      VITE_GITHUB_REDIRECT_URI: ${VITE_GITHUB_REDIRECT_URI}
       # CRON
       TZ: Europe/Paris
       CRON_USER: root
@@ -40,4 +48,4 @@ services:
       CRON_COMMAND: php artisan schedule:run
     labels:
       - traefik.enable=true
-      - traefik.http.routers.api.rule=Host(`api.${DOMAIN}`)
+      - traefik.http.routers.api.rule=Host(`api.${DOMAIN}`, `${IP_ADDRESS}`)

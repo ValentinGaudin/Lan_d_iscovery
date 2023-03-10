@@ -15,20 +15,33 @@ return [
     */
 
     'mailgun' => [
-        'domain' => env('MAILGUN_DOMAIN'),
-        'secret' => env('MAILGUN_SECRET'),
+        'domain'   => env('MAILGUN_DOMAIN'),
+        'secret'   => env('MAILGUN_SECRET'),
         'endpoint' => env('MAILGUN_ENDPOINT', 'api.mailgun.net'),
-        'scheme' => 'https',
+        'scheme'   => 'https'
     ],
 
     'postmark' => [
-        'token' => env('POSTMARK_TOKEN'),
+        'token' => env('POSTMARK_TOKEN')
     ],
 
     'ses' => [
-        'key' => env('AWS_ACCESS_KEY_ID'),
+        'key'    => env('AWS_ACCESS_KEY_ID'),
         'secret' => env('AWS_SECRET_ACCESS_KEY'),
-        'region' => env('AWS_DEFAULT_REGION', 'us-east-1'),
+        'region' => env('AWS_DEFAULT_REGION', 'us-east-1')
+    ],
+
+    'google' => [
+        'client_id'     => env('VITE_GOOGLE_CLIENT_ID'),
+        'api_key'       => env('VITE_GOOGLE_API_KEY'),
+        'client_secret' => env('VITE_GOOGLE_CLIENT_SECRET'),
+        'redirect'      => env('VITE_GOOGLE_REDIRECT_URI')
+    ],
+
+    'github' => [
+        'client_id'     => env('VITE_GITHUB_CLIENT_ID'),
+        'client_secret' => env('VITE_GITHUB_CLIENT_SECRET'),
+        'redirect'      => env('VITE_GITHUB_REDIRECT_URI'),
     ],
 
 ];

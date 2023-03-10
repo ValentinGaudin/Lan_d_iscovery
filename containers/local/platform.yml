@@ -3,6 +3,13 @@ services:
     environment:
       STARTUP_COMMAND_1: npm install
       STARTUP_COMMAND_2: npm run dev -- --port 3000 --host
-#      STARTUP_COMMAND_3: npx tailwindcss -i ./src/app.css -o ./dist/app.css --watch
+      #GOOGLE
+      GOOGLE_CLIENT_ID: ${VITE_GOOGLE_CLIENT_ID}
+      GOOGLE_CLIENT_SECRET: ${VITE_GOOGLE_CLIENT_SECRET}
+      GOOGLE_REDIRECT_URI: ${VITE_GOOGLE_REDIRECT_URI}
+      # GITHUB
+      VITE_GITHUB_CLIENT_ID: ${VITE_GITHUB_CLIENT_ID}
+      VITE_GITHUB_CLIENT_SECRET: ${VITE_GITHUB_CLIENT_SECRET}
+      VITE_GITHUB_REDIRECT_URI: ${VITE_GITHUB_REDIRECT_URI}
     volumes:
       - ../platform:/usr/src/app/:delegated

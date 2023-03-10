@@ -6,6 +6,7 @@ use App\Http\Requests\StorePostRequest;
 use App\Http\Requests\UpdatePostRequest;
 use App\Http\Resources\PostResource;
 use App\Models\Post;
+use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 use Illuminate\Http\Response;
 
 class PostController extends Controller
@@ -13,11 +14,11 @@ class PostController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return void
+     * @return AnonymousResourceCollection
      */
-    public function index(): void
+    public function index(): AnonymousResourceCollection
     {
-        //
+        return PostResource::collection(Post::all());
     }
 
     /**
@@ -34,11 +35,13 @@ class PostController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param Post $post
+     * @param string $id
      * @return PostResource
      */
-    public function show(Post $post): PostResource
+    public function show(string $id): PostResource
     {
+        $post = Post::query()->findOrFail($id);
+
         return new PostResource($post);
     }
 
