@@ -1,10 +1,10 @@
 import React, {useState} from "react";
 import axios, {AxiosResponse} from "axios";
 
-// interface IAuthProps {
-//     isAuthenticated: boolean;
-//     setAuthenticatedStatus: (authenticated: boolean) => void;
-// }
+interface IAuthProps {
+    isAuthenticated: boolean;
+    setAuthenticatedStatus: (authenticated: boolean) => void;
+}
 
 const LoginForm = ({ isAuthenticated, setAuthenticatedStatus}: IAuthProps) => {
     const [email, setEmail] = useState<string>("");
