@@ -29,7 +29,7 @@ const Navbar = () => {
                 <div className="flex items-center justify-between h-16">
                     <div className="flex-shrink-0">
                         <a href="/" className="text-white">
-                            My app de TOTO
+                            Beautifully app
                         </a>
                     </div>
                     <div className="hidden md:block">
