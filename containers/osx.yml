@@ -1,3 +1,9 @@
 services:
   database:
     platform: linux/amd64
+  mailing:
+    platform: linux/amd64
+  database_administration:
+    platform: linux/amd64
+  queue_db:
+    platform: linux/amd64

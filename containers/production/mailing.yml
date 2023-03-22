@@ -1,0 +1,10 @@
+services:
+  mailing:
+    environment:
+      MH_AUTH_FILE: /home/mailhog/user_config/auth
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.mailing.rule=Host(`mailing.${DOMAIN}`)
+      - traefik.http.services.mailing.loadbalancer.server.port=8025
+      - traefik.http.routers.mailing.entrypoints=websecure
+      - traefik.http.routers.mailing.tls.certresolver=httpsresolver

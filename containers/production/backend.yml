@@ -1,0 +1,31 @@
+services:
+  backend:
+    image: git.thecodingmachine.com:444/tcm-projects/${PROJECT_NAME}/backend:${CI_ENV}
+    environment:
+      TEMPLATE_PHP_INI: production
+      SESSION_SECURE_COOKIE: 1
+      APP_KEY: ${APP_KEY}
+    volumes:
+      - backend_storage:/var/www/html/storage
+
+  backend_webserver:
+    image: git.thecodingmachine.com:444/tcm-projects/${PROJECT_NAME}/backend-webserver:${CI_ENV}
+    volumes:
+      - backend_webserver_logs:/static-logs
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.backend_webserver.rule=Host(`backend.${DOMAIN}`)
+      - traefik.http.routers.backend_webserver.entrypoints=websecure
+      - traefik.http.routers.backend_webserver.tls.certresolver=httpsresolver
+
+  backend_cron:
+    extends: backend
+    image: git.thecodingmachine.com:444/tcm-projects/${PROJECT_NAME}/backend-cron:${CI_ENV}
+
+  backend_queue_worker:
+    extends: backend
+    image: git.thecodingmachine.com:444/tcm-projects/${PROJECT_NAME}/backend-queue-worker:${CI_ENV}
+
+volumes:
+  backend_storage:
+  backend_webserver_logs:

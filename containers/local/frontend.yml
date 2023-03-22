@@ -1,0 +1,12 @@
+services:
+  frontend:
+    # /!\ tty:true is used to keep the container alive in order to initialise the front project, once done, remove the line and this comment.
+    tty: true
+    build:
+      context: ../frontend
+      target: frontend-local
+    volumes:
+      - ../frontend:/app:delegated
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.frontend.rule=Host(`${DOMAIN}`)

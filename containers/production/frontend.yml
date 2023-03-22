@@ -1,0 +1,13 @@
+services:
+  frontend_webserver:
+    image: git.thecodingmachine.com:444/tcm-projects/${PROJECT_NAME}/frontend-webserver:${CI_ENV}
+    volumes:
+      - frontend_webserver_logs:/static-logs
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.frontend_webserver.rule=Host(`${DOMAIN}`)
+      - traefik.http.routers.frontend_webserver.entrypoints=websecure
+      - traefik.http.routers.frontend_webserver.tls.certresolver=httpsresolver
+
+volumes:
+  frontend_webserver_logs:

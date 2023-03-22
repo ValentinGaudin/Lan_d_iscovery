@@ -1,0 +1,4 @@
+#!/bin/bash
+set -e
+
+php /var/www/html/artisan queue:work --tries=3  >> /var/log/queue.log 2>&1

@@ -2,17 +2,33 @@ services:
   database:
     image: mysql:8.0
     volumes:
-      - database_volume_thelabs:/var/lib/mysql
+      - database_volume:/var/lib/mysql
     environment:
       MYSQL_DATABASE: ${DATABASE_NAME}
       MYSQL_USER: ${DATABASE_USER}
       MYSQL_PASSWORD: ${DATABASE_PASSWORD}
       MYSQL_ROOT_PASSWORD: ${DATABASE_ROOT_PASSWORD}
-      DB_CONNECTION: ${DB_CONNECTION}
-      DB_DATABASE: ${DATABASE_NAME}
-      DB_USERNAME: ${DATABASE_USER}
-      DB_PASSWORD: ${DATABASE_PASSWORD}
-      DB_HOST: ${DB_HOST}
+    healthcheck:
+      test: [ "CMD", "mysqladmin" ,"ping", "-h", "localhost" ]
+      interval: 3s
+      timeout: 3s
+      retries: 20
+
+  queue_db:
+    image: mysql:8.0
+    volumes:
+      - queue_database_volume:/var/lib/mysql
+    environment:
+      MYSQL_DATABASE: ${QUEUE_DATABASE_NAME}
+      MYSQL_USER: ${QUEUE_DATABASE_USER}
+      MYSQL_PASSWORD: ${QUEUE_DATABASE_PASSWORD}
+      MYSQL_ROOT_PASSWORD: ${QUEUE_DATABASE_ROOT_PASSWORD}
+    healthcheck:
+      test: [ "CMD", "mysqladmin" ,"ping", "-h", "localhost" ]
+      interval: 3s
+      timeout: 3s
+      retries: 20
 
 volumes:
-  database_volume_thelabs:
+  database_volume:
+  queue_database_volume:
