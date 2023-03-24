@@ -15,7 +15,7 @@ const Navbar = () => {
 
     const handleDisconnectForm = async () => {
         await axios.post(
-            "http://api.thelabs.localhost/api/logout",
+            "http://backend.adventurer.localhost/api/logout",
         ).then(function (response: AxiosResponse) {
             localStorage.removeItem("token");
             localStorage.removeItem("user");

@@ -13,7 +13,7 @@ const Home = () => {
     useEffect(() => {
         setIsLoading(true)
         axios.get(
-            'http://backend.thelabs.localhost/api/projects',
+            'http://backend.adventurer.localhost/api/projects',
         ).then(function (response: AxiosResponse<{ data: Project[] }>) {
             setProjects(response.data.data)
             setIsLoading(false)

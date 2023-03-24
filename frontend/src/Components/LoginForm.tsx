@@ -30,7 +30,7 @@ const LoginForm = ({showLoginForm, setShowLoginForm}: Props) => {
         }),
         onSubmit: values => {
             axios.post(
-                "http://api.thelabs.localhost/api/login", {
+                "http://backend.adventurer.localhost/api/login", {
                     email: values.email,
                     password : values.password,
                 },{
