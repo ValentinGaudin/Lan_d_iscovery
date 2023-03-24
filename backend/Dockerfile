@@ -1,13 +1,10 @@
 ######################
 ### PHP BASE IMAGE ###
 ######################
-FROM php:8.1-fpm-alpine AS backend-base
+FROM php:8.2-fpm-alpine AS backend-base
 
 ARG DOCKER_UID
 ARG DOCKER_GID
-
-# ARG NOVA_USERNAME
-# ARG NOVA_LICENSE_KEY
 
 # Basics
 RUN apk --update --no-cache add bash nano
