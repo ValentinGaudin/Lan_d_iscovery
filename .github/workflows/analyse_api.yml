@@ -3,7 +3,7 @@ name: "Static Analysis"
 on: [ push ]
 
 env:
-  WORKING_DIR_API: "./api/"
+  WORKING_DIR_API: "./backend/"
 
 jobs:
   analyse_api:
