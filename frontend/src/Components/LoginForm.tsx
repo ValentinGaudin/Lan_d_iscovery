@@ -21,18 +21,22 @@ const LoginForm = ({showLoginForm, setShowLoginForm}: Props) => {
         initialValues: {
             email: '',
             password: '',
+            remember: false
         },
         validationSchema: Yup.object({
             email: Yup.string().email('Invalid email address')
                 .required('Required'),
             password: Yup.string()
                 .required('Required'),
+            remember: Yup.boolean()
+                .nullable()
         }),
         onSubmit: values => {
             axios.post(
-                "http://backend.adventurer.localhost/api/login", {
+                "http://backend.thelaboratory.localhost/api/login", {
                     email: values.email,
                     password : values.password,
+                    remember: values.remember
                 },{
                     headers: {
                         'Content-Type':'multipart/form-data'
@@ -54,19 +58,24 @@ const LoginForm = ({showLoginForm, setShowLoginForm}: Props) => {
     };
 
     return (
-        <div className="absolute bg-gray-500 w-full h-full bg-opacity-80" >
-            <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-10 rounded-lg bg-primary w-3/6 h-3/6">
+            <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-10 rounded-lg bg-transparent w-3/6 backdrop-blur-md border-2 border-solid dark:border-amber-100 border-blue-100">
                 <span className="absolute right-0 p-5">
                     <BiBeer onClick={handleLoginClick} color="white" size="2em" className="hover:cursor-pointer"/>
                 </span>
-                <form onSubmit={formik.handleSubmit}>
-                    <div className="p-10">
-                        <div className="mb-4">
-                            <label className="block text-base font-bold mb-2" htmlFor="email">
+                <h3 className="flex justify-center p-5 text-white dark:text-base">
+                    Connexion
+                </h3>
+                <form onSubmit={formik.handleSubmit} className="flex justify-center items-center">
+                    <div className="w-3/4 p-10 flex flex-col items-center">
+                        <div className="md:flex md:items-center mt-4 mb-6 w-full">
+                            <label
+                                className="block text-base dark:text-white font-bold w-3/12"
+                                htmlFor="email"
+                            >
                                 Email
                             </label>
                             <input
-                                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                                className="shadow appearance-none border border-red-500 rounded w-full py-2 px-3 text-gray-700 dark:text-blue-200 mb-3 leading-tight focus:outline-none focus:shadow-outline"
                                 id="email"
                                 type="email"
                                 placeholder="Email"
@@ -77,15 +86,15 @@ const LoginForm = ({showLoginForm, setShowLoginForm}: Props) => {
                                 <div className="text-red-500 text-xs italic">{formik.errors.email}</div>
                             ) : null}
                         </div>
-                        <div className="mb-6">
+                        <div className="md:flex md:items-center mt-4 mb-6 w-full">
                             <label
-                                className="block text-base font-bold mb-2"
+                                className="block text-base dark:text-white font-bold w-3/12"
                                 htmlFor="password"
                             >
                                 Mot de passe
                             </label>
                             <input
-                                className="shadow appearance-none border border-red-500 rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
+                                className="shadow appearance-none border border-red-500 rounded w-full py-2 px-3 text-gray-700 dark:text-blue-200 mb-3 leading-tight focus:outline-none focus:shadow-outline"
                                 id="password"
                                 type="password"
                                 placeholder="******"
@@ -97,20 +106,26 @@ const LoginForm = ({showLoginForm, setShowLoginForm}: Props) => {
                             ) : null}
 
                             {/*{error ? <p className="text-red-500 text-xs italic">{error}</p> : null}*/}
-
                         </div>
-                        <div className="flex items-center justify-center">
-                            <button
-                                className="bg-secondary hover:bg-secondary text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline fixed bottom-10"
-                                type="submit"
-                            >
-                                Connexion
-                            </button>
+                        <div className="flex flex-col justify-center">
+                            <label htmlFor="remember">
+                                Se souvenir de moi ?
+                            </label>
+                            <input
+                                id="remember"
+                                type="checkbox"
+                                onChange={formik.handleChange}
+                            />
                         </div>
+                        <button
+                            className="bg-secondary hover:bg-tertiary text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline mt-4"
+                            type="submit"
+                        >
+                            Connexion
+                        </button>
                     </div>
                 </form>
             </div>
-        </div>
     );
 };
 

@@ -33,7 +33,7 @@ RUN yarn --frozen-lockfile
 
 ENV NODE_ENV=production
 
-COPY . .
+COPY ../frontend .
 
 RUN yarn build
 

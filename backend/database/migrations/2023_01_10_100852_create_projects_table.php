@@ -17,15 +17,25 @@ return new class extends Migration
             $table->id();
             $table->string('title');
             $table->longText('description');
-            $table->text('coverage')->nullable();
             $table->boolean('is_active')->default(true);
             $table->foreignId('author')->constrained('users');
+            $table->softDeletes();
             $table->timestamps();
         });
 
         Schema::create('category_project', function (Blueprint $table) {
+            $table->id();
             $table->foreignId('category_id')->constrained('categories');
             $table->foreignId('project_id')->constrained('projects');
+            $table->timestamps();
+        });
+
+        Schema::create('project_user', function (Blueprint $table) {
+            $table->id();
+            $table->foreignId('project_id')->constrained('projects');
+            $table->foreignId('user_id')->constrained('users');
+            $table->string('role');
+            $table->timestamps();
         });
     }
 
@@ -36,6 +46,7 @@ return new class extends Migration
      */
     public function down(): void
     {
+        Schema::dropIfExists('user_project');
         Schema::dropIfExists('category_project');
         Schema::dropIfExists('projects');
     }

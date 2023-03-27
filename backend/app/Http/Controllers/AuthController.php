@@ -4,25 +4,28 @@ namespace App\Http\Controllers;
 
 use App\Http\Resources\UserResource;
 use App\Models\User;
+use ErrorException;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
-use Illuminate\Http\Request;
 use Throwable;
 
 class AuthController extends Controller
 {
-    public function login(Request $request)
+    public function login(Request $request): JsonResponse
     {
         try {
             $validateUser = Validator::make(
                 $request->all(), [
                     'email'    => 'required|email',
-                    'password' => 'required|string'
+                    'password' => 'required|string',
+                    'remember' => 'string'
                 ]
             );
 
             if ($validateUser->fails()) {
-                return $this->response()->json([
+                return response()->json([
                     'status'  => false,
                     'message' => 'validation error',
                     'errors'  => $validateUser->errors()
@@ -35,7 +38,11 @@ class AuthController extends Controller
                 ], 401);
             }
 
-            $user = User::where('email', $request->input('email'))->firstOrFail();
+            $user = User::query()->where('email', $request->input('email'))->firstOrFail();
+
+            if (!$user instanceof User){
+                throw new ErrorException('There are no user with this email');
+            }
 
             return response()->json([
                 'status'  => true,
@@ -52,14 +59,14 @@ class AuthController extends Controller
         }
     }
 
-    public function logout(Request $request)
+    public function logout(Request $request): JsonResponse
     {
         Auth::logout();
 
         return response()->json(['message' => 'Successfully logged out']);
     }
 
-    public function refresh(Request $request)
+    public function refresh(Request $request): JsonResponse
     {
         $request->user()->tokens()->delete();
 
@@ -68,7 +75,7 @@ class AuthController extends Controller
         return response()->json(['access_token' => $token]);
     }
 
-    public function user(Request $request)
+    public function user(Request $request): JsonResponse
     {
         $user = User::query()->findOrFail($request->user()->getKey());
 

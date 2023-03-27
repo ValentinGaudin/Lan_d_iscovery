@@ -1,6 +1,5 @@
 services:
   frontend:
-    # /!\ tty:true is used to keep the container alive in order to initialise the front project, once done, remove the line and this comment.
     tty: true
     build:
       context: ../frontend

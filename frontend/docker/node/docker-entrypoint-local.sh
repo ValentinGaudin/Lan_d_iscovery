@@ -1,7 +1,7 @@
 #!/bin/sh
 set -e
 
-yarn install
+yarn
 yarn dev
 
 # Run command with node if the first argument contains a "-" or is not a system command. The last

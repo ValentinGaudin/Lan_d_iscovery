@@ -14,10 +14,13 @@ class ProjectFactory extends Factory
      *
      * @return array<string, mixed>
      */
-    public function definition()
+    public function definition(): array
     {
         return [
-            //
+            'title'       => $this->faker->title,
+            'description' => $this->faker->text('70'),
+            'is_active'   => $this->faker->boolean,
+            'author'      => 1,
         ];
     }
 }

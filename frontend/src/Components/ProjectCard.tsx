@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React from 'react';
 import {Project} from "../@types/Project";
 
 type Props = {
@@ -10,7 +10,7 @@ const ProjectCard = ({ project }: Props) => {
 		<div className="project-card p-10">
 			<div className="flex justify-center">
 				<div
-					className="flex flex-col border border-solid border-primary-light rounded-lg bg-primary hover:bg-quaternary shadow-lg dark:bg-neutral-700 md:max-w-xl md:flex-row w-[350px] h-[350px]">
+					className="flex flex-col border border-solid border-base-light rounded-lg bg-base hover:bg-quaternary shadow-lg dark:bg-neutral-700 md:max-w-xl md:flex-row w-[350px] h-[350px]">
 					<img
 						className="h-96 w-full rounded-t-lg object-cover md:h-auto md:w-48 md:rounded-none md:rounded-l-lg"
 						src="https://mdbootstrap.com/wp-content/uploads/2020/06/vertical.jpg"

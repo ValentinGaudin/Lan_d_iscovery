@@ -5,9 +5,12 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        primary : {
-          DEFAULT : '#1D1F26',
-          light : '#383D48',
+        base : {
+          DEFAULT : '#000',
+          light : '#0F1217',
+        },
+        primary: {
+
         },
         secondary : {
           DEFAULT : '#BB3DF1',
@@ -18,9 +21,9 @@ module.exports = {
         quaternary : {
           DEFAULT: '#1F9CEE'
         },
-        base : {
-          DEFAULT : '#0F1217',
-        }
+        glow : {
+
+        },
       }
     },
   },

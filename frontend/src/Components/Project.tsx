@@ -5,7 +5,7 @@ import {Project} from "../@types/Project";
 import Spinner from "./Spinner";
 
 
-const Home = () => {
+const Project = () => {
     const [projects, setProjects] = useState<Project[]>([]);
     const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState<string[]>();
@@ -13,7 +13,7 @@ const Home = () => {
     useEffect(() => {
         setIsLoading(true)
         axios.get(
-            'http://backend.adventurer.localhost/api/projects',
+            'http://backend.thelaboratory.localhost/api/projects',
         ).then(function (response: AxiosResponse<{ data: Project[] }>) {
             setProjects(response.data.data)
             setIsLoading(false)
@@ -31,4 +31,4 @@ const Home = () => {
         </div>
     );
 }
-export default Home;
+export default Project;

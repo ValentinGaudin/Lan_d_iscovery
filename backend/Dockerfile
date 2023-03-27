@@ -6,6 +6,9 @@ FROM php:8.2-fpm-alpine AS backend-base
 ARG DOCKER_UID
 ARG DOCKER_GID
 
+# ARG NOVA_USERNAME
+# ARG NOVA_LICENSE_KEY
+
 # Basics
 RUN apk --update --no-cache add bash nano
 
@@ -61,7 +64,7 @@ FROM backend-base as backend-production
 
 USER root
 
-COPY --chown=www-data:www-data . .
+COPY --chown=www-data:www-data ../backend .
 
 USER www-data
 

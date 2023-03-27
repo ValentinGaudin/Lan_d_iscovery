@@ -1,0 +1,12 @@
+stages:
+  - analyse
+  - build
+  - deploy
+
+include:
+  - local: 'ci/analyse/backend.yml'
+  - local: 'ci/analyse/frontend.yml'
+  - local: 'ci/build/index.yml'
+  - local: 'ci/build/backend.yml'
+  - local: 'ci/build/frontend.yml'
+  - local: 'ci/deploy/main.yml'

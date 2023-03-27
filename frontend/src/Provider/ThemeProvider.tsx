@@ -1,7 +1,7 @@
 import {createContext, ReactNode, useContext, useEffect, useState} from "react";
 
 type ThemeContext = {
-    theme: string,
+    theme: string | null,
     setTheme: (theme: string) => void,
 }
 
@@ -24,7 +24,8 @@ const ThemeProvider = ({ children }: Props) =>  {
             setTheme('dark')
             localStorage.setItem("theme", 'dark')
             document.documentElement.classList.add('dark')
-        } else {
+        }
+        if (theme && theme === "light") {
             setTheme('light')
             localStorage.setItem("theme", 'light')
             document.documentElement.classList.remove('dark')
@@ -34,14 +35,14 @@ const ThemeProvider = ({ children }: Props) =>  {
     useEffect(() => {
         const storageTheme = localStorage.getItem('theme');
         if (storageTheme && storageTheme === 'dark') {
-            setTheme('dark')
             document.documentElement.classList.add('dark')
-        } else {
-            setTheme('light')
+            setTheme('dark')
+        }
+        if (storageTheme && storageTheme === 'light') {
             document.documentElement.classList.remove('dark')
+            setTheme('light')
         }
     }, [])
-
 
 
     return (
