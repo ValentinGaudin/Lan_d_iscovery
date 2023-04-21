@@ -18,7 +18,6 @@ return new class extends Migration
             $table->string('civility', 10);
             $table->string('last_name', 30);
             $table->string('first_name', 30);
-            $table->string('pseudo', 20)->unique();
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');

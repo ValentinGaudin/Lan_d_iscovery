@@ -18,8 +18,10 @@ class PostFactory extends Factory
     public function definition(): array
     {
         return [
-            'title'       => $this->faker->sentences(1, true),
-            'description' => $this->faker->realText(rand(100, 400)),
+            'title'       => $this->faker->title,
+            'description' => $this->faker->realText('70'),
+            'is_active'   => $this->faker->boolean,
+            'author'      => 1,
         ];
     }
 }

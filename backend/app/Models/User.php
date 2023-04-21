@@ -53,11 +53,21 @@ class User extends Authenticatable
         'deleted_at'        => 'datetime'
     ];
 
-    public function projects(): BelongsToMany
+    /**
+     * @return BelongsToMany<Post>
+     */
+    public function posts(): BelongsToMany
     {
-        return $this->belongsToMany(Project::class);
+        return $this->belongsToMany(Post::class);
     }
 
+    /**
+     * @return BelongsToMany<Comment>
+     */
+    public function comments(): BelongsToMany
+    {
+        return $this->belongsToMany(Comment::class);
+    }
 
     /**
      * Get the user's full name.

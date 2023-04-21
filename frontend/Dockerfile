@@ -13,6 +13,7 @@ WORKDIR /app
 FROM frontend-base AS frontend-local
 
 ENV NODE_ENV=development
+ENV VITE_BASE_API_URL=http://backend.thelaboratory.localhost/api
 
 COPY docker/node/docker-entrypoint-local.sh /usr/local/bin/docker-entrypoint.sh
 RUN chmod +x /usr/local/bin/docker-entrypoint.sh

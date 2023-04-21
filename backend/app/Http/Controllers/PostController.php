@@ -6,7 +6,10 @@ use App\Http\Requests\StorePostRequest;
 use App\Http\Requests\UpdatePostRequest;
 use App\Http\Resources\PostResource;
 use App\Models\Post;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
+use Illuminate\Support\Facades\Validator;
 
 class PostController extends Controller
 {
@@ -42,6 +45,29 @@ class PostController extends Controller
         $post = Post::query()->findOrFail($id);
 
         return new PostResource($post);
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param Request $request
+     *
+     * @return JsonResponse|AnonymousResourceCollection
+     */
+    public function search(Request $request): JsonResponse|AnonymousResourceCollection
+    {
+        $validator = Validator::make($request->all(), [
+            'search' => 'required|string|min:3'
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json(['error' => $validator->errors()], 401);
+        }
+
+        $search = $request->input('search');
+        $post = Post::query()->where('title', 'like', "%$search%")->get();
+
+        return PostResource::collection($post);
     }
 
     /**

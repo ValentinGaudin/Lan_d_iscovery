@@ -20,7 +20,7 @@ class AuthController extends Controller
                 $request->all(), [
                     'email'    => 'required|email',
                     'password' => 'required|string',
-                    'remember' => 'string'
+//                    'remember' => 'string'
                 ]
             );
 
@@ -64,6 +64,50 @@ class AuthController extends Controller
         Auth::logout();
 
         return response()->json(['message' => 'Successfully logged out']);
+    }
+
+    public function register(Request $request): JsonResponse
+    {
+        try {
+            $validateUser = Validator::make(
+                $request->all(), [
+                    'name'     => 'required|string',
+                    'email'    => 'required|email|unique:users,email',
+                    'password' => 'required|string',
+                ]
+            );
+
+            if ($validateUser->fails()) {
+                return response()->json([
+                    'status'  => false,
+                    'message' => 'validation error',
+                    'errors'  => $validateUser->errors()
+                ], 401);
+            }
+
+            $user = User::query()->create([
+                'name'     => $request->input('name'),
+                'email'    => $request->input('email'),
+                'password' => bcrypt($request->input('password')),
+            ]);
+
+            if (!$user instanceof User){
+                throw new ErrorException('There are no user with this email');
+            }
+
+            return response()->json([
+                'status'  => true,
+                'message' => 'User Registered Successfully',
+                'token'   => $user->createToken('auth:api')->plainTextToken,
+                'user'    => new UserResource($user),
+            ], 201);
+
+        } catch (Throwable $th) {
+            return response()->json([
+                'status'  => false,
+                'message' => $th->getMessage()
+            ], 500);
+        }
     }
 
     public function refresh(Request $request): JsonResponse

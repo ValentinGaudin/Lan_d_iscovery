@@ -17,6 +17,7 @@ use JsonSerializable;
  * @property string $last_name
  * @property string $full_name
  * @property string $email
+ * @property string $pseudo
  * @property Carbon $created_at
  */
 class UserResource extends JsonResource
@@ -24,17 +25,22 @@ class UserResource extends JsonResource
     /**
      * Transform the resource into an array.
      *
-     * @param  Request  $request
+     * @param Request $request
+     *
      * @return array<string, int|string|Carbon>|Arrayable<string, int|string|Carbon>|JsonSerializable
      */
-    public function toArray($request): array|JsonSerializable|Arrayable
+    public function toArray(Request $request): array|JsonSerializable|Arrayable
     {
         return [
             'id'         => $this->id,
             'first_name' => $this->first_name,
             'last_name'  => $this->last_name,
-            'full_name'  => $this->fullName,
+            'full_name'  => $this->full_name,
             'email'      => $this->email,
+            'pseudo'     => $this->pseudo,
+            'role'       => $this->whenPivotLoaded('project_user', function() {
+                return $this->pivot->role;
+            }),
             'created_at' => $this->created_at->format('Y-m-d'),
         ];
     }
