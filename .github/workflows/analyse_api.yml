@@ -29,7 +29,7 @@ jobs:
           coverage: "none"
 
       - name: "Install composer.json"
-        run: "composer install --working-dir=$WORKING_DIR_API"
+        run: "composer install --working-dir=$WORKING_DIR_API --ignore-platform-reqs"
 
       - name: "Validate composer"
         run: "composer validate --strict --working-dir=$WORKING_DIR_API"
