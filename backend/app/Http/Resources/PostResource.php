@@ -23,7 +23,6 @@ use Ramsey\Collection\Collection;
  * @property int        $author
  * @property Collection $users
  * @property Collection $categories
- * @property Collection $comments
  */
 class PostResource extends JsonResource
 {
@@ -32,7 +31,7 @@ class PostResource extends JsonResource
      *
      * @param Request $request
      *
-     * @return array<string, int|string|Carbon>|Arrayable<string, int|string|Carbon>|JsonSerializable
+     * @return array<string, mixed>|Arrayable<string, mixed>|JsonSerializable
      */
     public function toArray(Request $request): array|JsonSerializable|Arrayable
     {
@@ -47,7 +46,6 @@ class PostResource extends JsonResource
             'deleted_at'  => $this->updated_at->format('Y-m-d H:i'),
             'users'       => UserResource::collection($this->users),
             'categories'  => CategoryResource::collection($this->categories),
-            'comments'    => CommentResource::collection($this->comments),
         ];
     }
 }

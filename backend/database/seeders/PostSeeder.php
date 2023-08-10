@@ -24,12 +24,7 @@ class PostSeeder extends Seeder
         $posts = Post::all();
 
         $posts->each(function (Post $post) {
-            $post->categories()->attach(Category::query()->find(rand(1, 20))->getKey());
-            $post->users()->syncWithPivotValues(
-                User::query()->first()->getKey(), [
-                    'role' => 'RT'
-                ]
-            );
+            $post->categories()->attach(Category::query()->find(rand(1, 20))?->getKey());
         });
     }
 }

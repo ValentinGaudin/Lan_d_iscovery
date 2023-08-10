@@ -1,9 +1,9 @@
 <?php
 
 use App\Http\Controllers\AuthController;
-use App\Http\Controllers\CommentController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\SocialController;
+use Illuminate\Http\Client\Request;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -29,7 +29,6 @@ Route::post('/logout', [AuthController::class, 'logout']);
 Route::middleware(['auth:sanctum'])->group(function () {
     Route::get('/me', [AuthController::class, 'user']);
     Route::post('/refresh', [AuthController::class, 'refresh']);
-    Route::post('/comments', [CommentController::class, 'store']);
 });
 
 Route::get('/posts', [PostController::class, 'index']);

@@ -14,21 +14,5 @@ services:
       timeout: 3s
       retries: 20
 
-  queue_db:
-    image: mysql:8.0
-    volumes:
-      - queue_database_volume:/var/lib/mysql
-    environment:
-      MYSQL_DATABASE: ${QUEUE_DATABASE_NAME}
-      MYSQL_USER: ${QUEUE_DATABASE_USER}
-      MYSQL_PASSWORD: ${QUEUE_DATABASE_PASSWORD}
-      MYSQL_ROOT_PASSWORD: ${QUEUE_DATABASE_ROOT_PASSWORD}
-    healthcheck:
-      test: [ "CMD", "mysqladmin" ,"ping", "-h", "localhost" ]
-      interval: 3s
-      timeout: 3s
-      retries: 20
-
 volumes:
   database_volume:
-  queue_database_volume:

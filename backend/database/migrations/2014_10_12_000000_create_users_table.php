@@ -24,7 +24,7 @@ return new class extends Migration
             $table->string('provider_class')->nullable();
             $table->string('provider_id')->nullable();
             $table->string('provider_token')->nullable();
-            $table->boolean('is_creator')->default(false);
+            $table->morphs('userable');
             $table->rememberToken();
             $table->timestamps();
             $table->softDeletes();

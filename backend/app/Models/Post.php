@@ -13,21 +13,27 @@ class Post extends Model
 {
     use HasFactory;
 
+    /**
+     * @var string[]
+     */
     protected $fillable = [
         'title',
         'description',
         'is_active',
-        'author',
     ];
-
-    protected $casts = [
-        'is_active' => 'boolean',
-    ];
-
-    protected $with = ['categories', 'users', 'comments'];
 
     /**
-     * @return BelongsToMany
+     * @var array<string, string>
+     */
+    protected $casts = [
+        'is_active' => 'boolean',
+        'created_at' => 'datetime:d/m/Y',
+    ];
+
+    protected $with = ['categories', 'users'];
+
+    /**
+     * @return BelongsToMany<Category>
      */
     public function categories(): BelongsToMany
     {
@@ -35,27 +41,11 @@ class Post extends Model
     }
 
     /**
-     * @return BelongsToMany
-     */
-    public function users(): BelongsToMany
-    {
-        return $this->belongsToMany(User::class)->withPivot('role');
-    }
-
-    /**
      * @return HasMany<File>
      */
     public function files(): HasMany
     {
-        return $this->HasMany(File::class);
-    }
-
-    /**
-     * @return HasMany<Comment>
-     */
-    public function comments(): HasMany
-    {
-        return $this->HasMany(Comment::class);
+        return $this->hasMany(File::class);
     }
 
     /**
@@ -66,8 +56,8 @@ class Post extends Model
         return $this->MorphMany(
             Statistic::class,
             'views',
-            'organization_class',
-            'organization_id'
+            'statistical_class',
+            'statistical_id'
         );
     }
 }

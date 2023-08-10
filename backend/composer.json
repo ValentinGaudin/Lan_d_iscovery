@@ -11,7 +11,8 @@
         "laravel/framework": "^10.0",
         "laravel/sanctum": "^3.2",
         "laravel/socialite": "^5.6",
-        "laravel/tinker": "^2.8"
+        "laravel/tinker": "^2.8",
+        "symfony/var-dumper": "^6.3"
     },
     "require-dev": {
         "fakerphp/faker": "^1.9.1",
@@ -19,11 +20,11 @@
         "laravel/sail": "^1.18",
         "mockery/mockery": "^1.4.4",
         "nunomaduro/collision": "^7.0",
-        "nunomaduro/larastan": "^2.2",
+        "nunomaduro/larastan": "^2.6",
         "phpstan/phpstan": "^1.9",
         "phpunit/phpunit": "^10.0",
-        "squizlabs/php_codesniffer": "^3.7",
         "spatie/laravel-ignition": "^2.0",
+        "squizlabs/php_codesniffer": "^3.7",
         "thecodingmachine/phpstan-strict-rules": "^1.0"
     },
     "autoload": {
@@ -52,12 +53,21 @@
         "post-create-project-cmd": [
             "@php artisan key:generate --ansi"
         ],
-        "test:types": "phpstan analyse --ansi -c ./phpstan.neon --memory-limit=2048m",
-        "test:linter": "phpcs",
-        "test:unit": "phpunit --colors=always -d memory_limit=1280M",
+        "phpstan": [
+            "phpstan analyse --ansi -c ./phpstan.neon --memory-limit=2G"
+        ],
+        "phpcs": [
+            "phpcs"
+        ],
+        "phpcbf": [
+            "phpcbf"
+        ],
+        "phpunit": [
+            "phpunit --colors=always -d memory_limit=2G"
+        ],
         "test": [
-            "@test:types",
-            "@test:unit"
+            "@phpstan",
+            "@phpcs"
         ]
     },
     "extra": {

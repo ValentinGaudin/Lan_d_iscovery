@@ -2,112 +2,43 @@ import React from 'react';
 
 const Footer = () => {
     return (
-        <footer className="relative pt-8 pb-6 fixed bottom-0">
-            <div className="container mx-auto px-4">
-                <div className="flex flex-wrap text-left lg:text-left">
-                    <div className="w-full lg:w-6/12 px-4">
-                        <h4 className="text-3xl">
-                            Let's keep in touch!
-                        </h4>
-                        <h5 className="text-lg mt-0 mb-2">
-                            Find us on any of these platforms, we respond 1-2 business days.
-                        </h5>
-                        <div className="mt-6 lg:mb-0 mb-6">
-                            <button
-                                className="bg-white shadow-lg font-normal h-10 w-10 items-center justify-center align-center rounded-full outline-none focus:outline-none mr-2"
-                                type="button">
-                                <i className="fab fa-twitter"></i></button>
-                            <button
-                                className="bg-white shadow-lg font-normal h-10 w-10 items-center justify-center align-center rounded-full outline-none focus:outline-none mr-2"
-                                type="button">
-                                <i className="fab fa-facebook-square"></i></button>
-                            <button
-                                className="bg-white text-pink-400 shadow-lg font-normal h-10 w-10 items-center justify-center align-center rounded-full outline-none focus:outline-none mr-2"
-                                type="button">
-                                <i className="fab fa-dribbble"></i></button>
-                            <button
-                                className="bg-white shadow-lg font-normal h-10 w-10 items-center justify-center align-center rounded-full outline-none focus:outline-none mr-2"
-                                type="button">
-                                <i className="fab fa-github"></i>
-                            </button>
-                        </div>
+        <div className="bottom-0 w-full">
+            <footer className="dark:bg-base">
+                <div className="w-full max-w-screen-xl mx-auto p-4 md:py-8">
+                    <div className="sm:flex sm:items-center sm:justify-between">
+                        <a href="https://flowbite.com/" className="flex items-center mb-4 sm:mb-0">
+                            <img
+                                src="https://flowbite.com/docs/images/logo.svg" className="h-8 mr-3"
+                                alt="Flowbite Logo"/>
+                            <span
+                                className="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">Flowbite</span>
+                        </a>
+                        <ul className="flex flex-wrap items-center mb-6 text-sm font-medium text-gray-500 sm:mb-0 dark:text-gray-400">
+                            <li>
+                                <a href="#" className="mr-4 hover:underline md:mr-6 ">About</a>
+                            </li>
+                            <li>
+                                <a href="#" className="mr-4 hover:underline md:mr-6">Privacy Policy</a>
+                            </li>
+                            <li>
+                                <a href="#" className="mr-4 hover:underline md:mr-6 ">Licensing</a>
+                            </li>
+                            <li>
+                                <a href="#" className="hover:underline">Contact</a>
+                            </li>
+                        </ul>
                     </div>
-                    <div className="w-full lg:w-6/12 px-4">
-                        <div className="flex flex-wrap items-top mb-6">
-                            <div className="w-full lg:w-4/12 px-4 ml-auto">
-                                <span className="block uppercase text-blueGray-500 text-sm font-semibold mb-2">Useful Links</span>
-                                <ul className="list-unstyled">
-                                    <li>
-                                        <a className=" hover:text-blueGray-800 font-semibold block pb-2 text-sm"
-                                           href="https://www.creative-tim.com/presentation?ref=njs-profile">About Us</a>
-                                    </li>
-                                    <li>
-                                        <a className=" hover:text-blueGray-800 font-semibold block pb-2 text-sm"
-                                           href="https://blog.creative-tim.com?ref=njs-profile">Blog</a>
-                                    </li>
-                                    <li>
-                                        <a className=" hover:text-blueGray-800 font-semibold block pb-2 text-sm"
-                                           href="https://www.github.com/creativetimofficial?ref=njs-profile">Github</a>
-                                    </li>
-                                    <li>
-                                        <a className=" hover:text-blueGray-800 font-semibold block pb-2 text-sm"
-                                           href="https://www.creative-tim.com/bootstrap-themes/free?ref=njs-profile">Free
-                                            Products</a>
-                                    </li>
-                                </ul>
-                            </div>
-                            <div className="w-full lg:w-4/12 px-4">
-                                <span className="block uppercase text-sm font-semibold mb-2">Other Resources</span>
-                                <ul className="list-unstyled">
-                                    <li>
-                                        <a className=" hover:text-blueGray-800 font-semibold block pb-2 text-sm"
-                                           href="https://github.com/creativetimofficial/notus-js/blob/main/LICENSE.md?ref=njs-profile">MIT
-                                            License</a>
-                                    </li>
-                                    <li>
-                                        <a className=" hover:text-blueGray-800 font-semibold block pb-2 text-sm"
-                                           href="https://creative-tim.com/terms?ref=njs-profile">Terms &amp; Conditions</a>
-                                    </li>
-                                    <li>
-                                        <a className=" hover:text-blueGray-800 font-semibold block pb-2 text-sm"
-                                           href="https://creative-tim.com/privacy?ref=njs-profile">Privacy Policy</a>
-                                    </li>
-                                    <li>
-                                        <a className=" hover:text-blueGray-800 font-semibold block pb-2 text-sm"
-                                           href="https://creative-tim.com/contact-us?ref=njs-profile">Contact Us</a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
+                    <hr className="my-6 border-gray-200 sm:mx-auto dark:border-gray-700 lg:my-8"/>
+                    <span className="block text-sm text-gray-500 sm:text-center dark:text-gray-400">© 2023 <a
+                        href="https://flowbite.com/"
+                        className="hover:underline">
+                        Flowbite™
+                    </a>. All Rights Reserved.</span>
                 </div>
-                <div className="my-6 ">
-                    <div className="flex flex-wrap items-center md:justify-between justify-center">
-                        <div className="w-full md:w-4/12 px-4 mx-auto text-center">
-                            <div className="text-sm  font-semibold py-1">
-                                Copyright ©
-                                <span id="get-current-year">
-                                    2021
-                                </span>
-                                <a
-                                    href="https://www.creative-tim.com/product/notus-js"
-                                    className="hover:text-gray-800" target="_blank"
-                                >
-                                    Notus JS by
-                                </a>
-                                <a
-                                    href="https://www.creative-tim.com?ref=njs-profile"
-                                    className=" hover:text-blueGray-800"
-                                >
-                                    Creative Tim
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </footer>
+            </footer>
 
+
+        </div>
     );
 };
 

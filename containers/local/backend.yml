@@ -26,9 +26,3 @@ services:
     build:
       context: ../backend
       target: backend-cron-local
-
-  backend_queue_worker:
-    extends: backend
-    build:
-      context: ../backend
-      target: backend-queue-local

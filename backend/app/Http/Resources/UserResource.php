@@ -27,7 +27,7 @@ class UserResource extends JsonResource
      *
      * @param Request $request
      *
-     * @return array<string, int|string|Carbon>|Arrayable<string, int|string|Carbon>|JsonSerializable
+     * @return array<string, mixed>|Arrayable<string, mixed>|JsonSerializable
      */
     public function toArray(Request $request): array|JsonSerializable|Arrayable
     {
@@ -38,9 +38,6 @@ class UserResource extends JsonResource
             'full_name'  => $this->full_name,
             'email'      => $this->email,
             'pseudo'     => $this->pseudo,
-            'role'       => $this->whenPivotLoaded('project_user', function() {
-                return $this->pivot->role;
-            }),
             'created_at' => $this->created_at->format('Y-m-d'),
         ];
     }

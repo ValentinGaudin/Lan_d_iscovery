@@ -19,7 +19,6 @@ return new class extends Migration
             $table->longText('description');
             $table->string('slug');
             $table->boolean('is_active')->default(true);
-            $table->foreignId('author')->constrained('users');
             $table->softDeletes();
             $table->timestamps();
         });
@@ -31,13 +30,6 @@ return new class extends Migration
             $table->timestamps();
         });
 
-        Schema::create('post_user', function (Blueprint $table) {
-            $table->id();
-            $table->foreignId('post_id')->constrained('posts');
-            $table->foreignId('user_id')->constrained('users');
-            $table->string('role');
-            $table->timestamps();
-        });
     }
 
     /**
@@ -47,7 +39,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('user_post');
         Schema::dropIfExists('category_post');
         Schema::dropIfExists('posts');
     }

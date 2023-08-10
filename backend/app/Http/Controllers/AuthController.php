@@ -8,6 +8,7 @@ use ErrorException;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Throwable;
 
@@ -17,10 +18,11 @@ class AuthController extends Controller
     {
         try {
             $validateUser = Validator::make(
-                $request->all(), [
+                $request->all(),
+                [
                     'email'    => 'required|email',
                     'password' => 'required|string',
-//                    'remember' => 'string'
+                //                    'remember' => 'string'
                 ]
             );
 
@@ -40,7 +42,7 @@ class AuthController extends Controller
 
             $user = User::query()->where('email', $request->input('email'))->firstOrFail();
 
-            if (!$user instanceof User){
+            if (!$user instanceof User) {
                 throw new ErrorException('There are no user with this email');
             }
 
@@ -50,7 +52,6 @@ class AuthController extends Controller
                 'token'   => $user->createToken('auth:api')->plainTextToken,
                 'user'    => new UserResource($user),
             ], 201);
-
         } catch (Throwable $th) {
             return response()->json([
                 'status'  => false,
@@ -70,7 +71,8 @@ class AuthController extends Controller
     {
         try {
             $validateUser = Validator::make(
-                $request->all(), [
+                $request->all(),
+                [
                     'name'     => 'required|string',
                     'email'    => 'required|email|unique:users,email',
                     'password' => 'required|string',
@@ -88,10 +90,10 @@ class AuthController extends Controller
             $user = User::query()->create([
                 'name'     => $request->input('name'),
                 'email'    => $request->input('email'),
-                'password' => bcrypt($request->input('password')),
+                'password' => Hash::make($request->string('password')),
             ]);
 
-            if (!$user instanceof User){
+            if (!$user instanceof User) {
                 throw new ErrorException('There are no user with this email');
             }
 
@@ -101,7 +103,6 @@ class AuthController extends Controller
                 'token'   => $user->createToken('auth:api')->plainTextToken,
                 'user'    => new UserResource($user),
             ], 201);
-
         } catch (Throwable $th) {
             return response()->json([
                 'status'  => false,
@@ -112,17 +113,23 @@ class AuthController extends Controller
 
     public function refresh(Request $request): JsonResponse
     {
-        $request->user()->tokens()->delete();
+        if ($request->user()) {
+            $user = $request->user();
 
-        $token = $request->user()->createToken('auth:api')->plainTextToken;
+            $user->tokens()->delete();
+            $token = $user->createToken('auth:api')->plainTextToken;
 
-        return response()->json(['access_token' => $token]);
+            return response()->json(['access_token' => $token]);
+        }
+
+        return response()->json(['message' => 'Unauthenticated'], 401);
     }
 
     public function user(Request $request): JsonResponse
     {
-        $user = User::query()->findOrFail($request->user()->getKey());
-
-        return response()->json(new UserResource($user));
+        if ($request->user()) {
+            return response()->json(new UserResource($request->user()));
+        }
+        return response()->json(null, 401);
     }
 }

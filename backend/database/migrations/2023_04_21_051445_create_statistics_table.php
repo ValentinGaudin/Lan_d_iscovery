@@ -13,8 +13,7 @@ return new class extends Migration
     {
         Schema::create('statistics', function (Blueprint $table) {
             $table->id();
-            $table->string('statistic_class');
-            $table->foreignId('statistic_id');
+            $table->morphs('statistical');
             $table->timestamps();
         });
     }

@@ -29,6 +29,9 @@ class Category extends Model
         return $this->belongsToMany(Post::class);
     }
 
+    /**
+     * @return HasMany<File>
+     */
     public function files(): HasMany
     {
         return $this->HasMany(File::class);

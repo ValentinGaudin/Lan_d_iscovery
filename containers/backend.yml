@@ -23,12 +23,6 @@ services:
       DB_USERNAME: ${DATABASE_USER}
       DB_PASSWORD: ${DATABASE_PASSWORD}
       DB_HOST: database
-      # DATABASE QUEUE WORKER
-      QUEUE_CONNECTION: database
-      QUEUE_DB_DATABASE: ${QUEUE_DATABASE_NAME}
-      QUEUE_DB_USERNAME: ${QUEUE_DATABASE_USER}
-      QUEUE_DB_PASSWORD: ${QUEUE_DATABASE_PASSWORD}
-      QUEUE_DB_HOST: queue_db
       # EMAILING
       MAIL_USERNAME: ${MAIL_USERNAME}
       MAIL_PASSWORD: ${MAIL_PASSWORD}
@@ -51,16 +45,4 @@ services:
       disable: true
     depends_on:
       backend:
-        condition: service_healthy
-
-  backend_queue_worker:
-    extends: backend
-    healthcheck:
-      disable: true
-    # Le restart always est recommandé afin de redémarrer automatiquement le container après l'exécution de la commande queue:restart.
-    #restart: always
-    depends_on:
-      backend:
-        condition: service_healthy
-      queue_db:
         condition: service_healthy

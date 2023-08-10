@@ -102,34 +102,6 @@ FROM backend-cron-base AS backend-cron-production
 COPY --from=backend-production /var/www/html /var/www/html
 
 ##################################
-### QUEUE WORKER BASE IMAGE ######
-##################################
-FROM backend-base AS backend-queue-base
-
-USER root
-
-COPY docker/queue/docker-entrypoint /usr/local/bin/docker-queue-entrypoint
-RUN chmod +x /usr/local/bin/docker-queue-entrypoint
-
-RUN touch /var/log/queue.log
-RUN chown www-data:www-data /var/log/queue.log
-
-USER www-data
-ENTRYPOINT ["docker-queue-entrypoint"]
-
-##################################
-### QUEUE WORKER LOCAL IMAGE ###
-##################################
-FROM backend-queue-base AS backend-queue-local
-
-##################################
-### QUEUE WORKER PRODUCTION IMAGE ###
-##################################
-FROM backend-queue-base AS backend-queue-production
-
-COPY --from=backend-production /var/www/html /var/www/html
-
-##################################
 ### WEBSERVER NGINX BASE IMAGE ###
 ##################################
 FROM nginx:stable AS webserver-base

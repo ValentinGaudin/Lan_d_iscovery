@@ -24,7 +24,7 @@ class Statistic extends Model
      * Get the parent commentable model (post or video).
      * @return MorphTo<Model, Statistic>
      */
-    public function statistics(): MorphTo
+    public function statistical(): MorphTo
     {
         return $this->morphTo();
     }

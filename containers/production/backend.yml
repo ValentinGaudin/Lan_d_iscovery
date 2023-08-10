@@ -22,10 +22,6 @@ services:
     extends: backend
     image: git.thecodingmachine.com:444/tcm-projects/${PROJECT_NAME}/backend-cron:${CI_ENV}
 
-  backend_queue_worker:
-    extends: backend
-    image: git.thecodingmachine.com:444/tcm-projects/${PROJECT_NAME}/backend-queue-worker:${CI_ENV}
-
 volumes:
   backend_storage:
   backend_webserver_logs:

@@ -1,7 +1,7 @@
 import axios, {AxiosResponse} from 'axios';
 
 export const BASE_URL = import.meta.env.VITE_BASE_API_URL;
-console.log(BASE_URL)
+console.log(BASE_URL);
 function login(email: string, password: string): Promise<AxiosResponse> {
     return axios.post(`${BASE_URL}/login`, {
             email: email,

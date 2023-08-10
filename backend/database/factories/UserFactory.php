@@ -22,7 +22,6 @@ class UserFactory extends Factory
             'civility'          => 'Mr',
             'last_name'         => fake()->lastName(),
             'first_name'        => fake()->firstName(),
-            'pseudo'            => 'toto',
             'email'             => 'valentingaudin@gmail.com',
             'email_verified_at' => now(),
             'password'          => Hash::make('password')

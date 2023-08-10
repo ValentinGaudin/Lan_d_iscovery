@@ -20,9 +20,9 @@ class CategoryResource extends JsonResource
      *
      * @param Request $request
      *
-     * @return array<int, string>|Arrayable<int, string>|JsonSerializable
+     * @return array{id: int, title: string}
      */
-    public function toArray(Request $request): array|JsonSerializable|Arrayable
+    public function toArray(Request $request): array
     {
         return [
             'id'    => $this->id,

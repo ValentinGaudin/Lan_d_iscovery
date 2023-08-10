@@ -4,11 +4,16 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\MorphTo;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 
+/**
+ * @property Userable $userable
+ */
 class User extends Authenticatable
 {
     use HasApiTokens;
@@ -48,7 +53,7 @@ class User extends Authenticatable
      */
     protected $casts = [
         'email_verified_at' => 'datetime',
-        'created_at'        => 'datetime',
+        'created_at'        => 'datetime:d/m/Y',
         'updated_at'        => 'datetime',
         'deleted_at'        => 'datetime'
     ];
@@ -62,22 +67,22 @@ class User extends Authenticatable
     }
 
     /**
-     * @return BelongsToMany<Comment>
+     * @return MorphTo<Model, User>
      */
-    public function comments(): BelongsToMany
+    public function userable(): MorphTo
     {
-        return $this->belongsToMany(Comment::class);
+        return $this->morphTo();
     }
 
     /**
      * Get the user's full name.
      *
-     * @return Attribute<callable, string>
+     * @return Attribute<string, string>
      */
     public function fullName(): Attribute
     {
-        return Attribute::make(
-            get: fn () => ucfirst($this->civility) .' '. $this->last_name .' '. $this->first_name,
+        return Attribute::get(
+            fn () => ucfirst($this->civility) . ' ' . $this->last_name . ' ' . $this->first_name,
         );
     }
 }

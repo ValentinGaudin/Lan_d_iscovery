@@ -2,6 +2,7 @@
 
 namespace App\Policies;
 
+use App\Models\Creator;
 use App\Models\Post;
 use App\Models\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
@@ -15,24 +16,24 @@ class PostPolicy
      *
      * @param User $user
      *
-     * @return void
+     * @return bool
      */
-    public function viewAny(User $user): void
+    public function viewAny(User $user): bool
     {
-        //
+        return true;
     }
 
     /**
      * Determine whether the user can view the model.
      *
-     * @param  User $user
-     * @param Post  $post
+     * @param User $user
+     * @param Post $post
      *
-     * @return void
+     * @return bool
      */
-    public function view(User $user, Post $post): void
+    public function view(User $user, Post $post): bool
     {
-        //
+        return true;
     }
 
     /**
@@ -40,62 +41,62 @@ class PostPolicy
      *
      * @param User $user
      *
-     * @return void
+     * @return bool
      */
-    public function create(User $user): void
+    public function create(User $user): bool
     {
-        //
+        return $user->userable instanceof Creator;
     }
 
     /**
      * Determine whether the user can update the model.
      *
-     * @param  User $user
-     * @param Post              $post
+     * @param User $user
+     * @param Post $post
      *
-     * @return void
+     * @return bool
      */
-    public function update(User $user, Post $post): void
+    public function update(User $user, Post $post): bool
     {
-        //
+        return $user->userable instanceof Creator;
     }
 
     /**
      * Determine whether the user can delete the model.
      *
-     * @param  User  $user
-     * @param Post  $post
+     * @param User $user
+     * @param Post $post
      *
-     * @return void
+     * @return bool
      */
-    public function delete(User $user, Post $post): void
+    public function delete(User $user, Post $post): bool
     {
-        //
+        return $user->userable instanceof Creator;
     }
 
     /**
      * Determine whether the user can restore the model.
      *
-     * @param  User $user
-     * @param  Post             $post
+     * @param User $user
+     * @param Post $post
      *
-     * @return void
+     * @return bool
      */
-    public function restore(User $user, Post $post): void
+    public function restore(User $user, Post $post): bool
     {
-        //
+        return $user->userable instanceof Creator;
     }
 
     /**
      * Determine whether the user can permanently delete the model.
      *
-     * @param  User $user
-     * @param  Post             $post
+     * @param User $user
+     * @param Post $post
      *
-     * @return void
+     * @return bool
      */
-    public function forceDelete(User $user, Post $post): void
+    public function forceDelete(User $user, Post $post): bool
     {
-        //
+        return $user->userable instanceof Creator;
     }
 }

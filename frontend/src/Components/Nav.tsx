@@ -1,7 +1,5 @@
 import React, {useState} from 'react';
 import {Form, NavLink, useLoaderData} from "react-router-dom";
-import {BsSignpostSplit} from "react-icons/all";
-import Spinner from "./Spinner";
 import {logout} from "../Api/Base";
 import {useFormik} from "formik";
 import * as Yup from "yup";
@@ -10,12 +8,18 @@ import {Post} from "../@types/Post";
 import NavLinkPost from "./NavLinkPost";
 import {useUserContext} from "../Provider/AuthProvider";
 import HomeForm from "./Form/HomeForm";
+import NavigationLink from "./NavigationLink";
+import Spinner from "./Spinner";
+import {useThemeContext} from "../Provider/ThemeProvider";
+import {BsFillMoonFill, BsSun} from "react-icons/all";
 
 const Nav = () => {
     const [showLoginForm, setShowLoginForm] = useState<boolean>(false);
     const [search, setSearch] = useState<Post[]>([]);
     const {isConnected, setIsConnected, currentUser} = useUserContext();
     const [isLoading, setIsLoading] = useState<boolean>(false);
+    const {theme, setTheme} = useThemeContext();
+
     const handleDisconnectForm = async () => {
         await logout().then(() => {
             localStorage.removeItem("token");
@@ -29,7 +33,13 @@ const Nav = () => {
             : setShowLoginForm(true)
     };
 
-    const formik = useFormik({
+    const toggleTheme = () => {
+        theme === 'dark'
+            ? setTheme('light')
+            : setTheme('dark')
+    }
+
+    const formik= useFormik({
         initialValues: {
             search: '',
         },
@@ -58,7 +68,7 @@ const Nav = () => {
         if (!isLoading && search.length === 0) {
             return <NavLinkPost posts={posts} />
         }
-        if(!isLoading && search.length > 0) {
+        if (!isLoading && search.length > 0) {
             return <NavLinkPost posts={search} />
         }
     }
@@ -69,24 +79,30 @@ const Nav = () => {
 
     return (
         <>
-        <div className="flex flex-col justify-between h-screen space-y-6 md:space-y-10 pt-10">
-            <div>
+        <section
+            data-show="navigation"
+            id="nav"
+            className="flex items-center justify-between p-3"
+        >
+            <div className="flex flex-col">
                 <NavLink to={'/'} >
                     <h1 className="font-bold text-4xl text-center lg:hidden text-base-light dark:text-white duration-300 ease-in-out">
                         Lan_discovery
                         <span className="text-teal-600">
-                                .
-                            </span>
+                            .
+                        </span>
                     </h1>
                     <h1 className="hidden lg:block font-bold text-sm md:text-xl text-center text-gray-800 dark:text-white duration-700">
                         The Land discovery
                         <span className="text-primary">
-                            .
-                            </span>
+                        .
+                        </span>
                     </h1>
                 </NavLink>
-
-                <div id="profile" className="space-y-10 mt-4">
+                <div
+                    id="profile"
+                    className="space-y-10"
+                >
                     {
                         isConnected
                             ?
@@ -97,7 +113,7 @@ const Nav = () => {
                                     className="w-10 md:w-16 rounded-full mx-auto space-y-3 ring-2 ring-amber-500"
                                 />
                                 <div>
-                                    <h2 className="font-medium text-xs md:text-sm text-center text-amber-500 pb-4">
+                                    <h2 className="font-medium text-xs md:text-sm text-center text-amber-500">
                                         {currentUser?.full_name}
                                     </h2>
                                 </div>
@@ -110,11 +126,30 @@ const Nav = () => {
                             />
                     }
                 </div>
+            </div>
+
+
+            <section
+                className="flex justify-center h-full items-center flex-1 space-x-10"
+            >
                 <div
-                    className="flex border-2 border-gray-200 rounded-md focus-within:ring-2 ring-amber-500 mt-3"
+                    id="menu"
+                    className="flex space-x-4"
+                >
+                    <NavigationLink title={"Articles"} path={"posts"}/>
+                    <NavigationLink title={"Qui sommes-nous ?"} path={"whoiam"}/>
+                    <NavigationLink title={"Carte"} path={"road"}/>
+                    {/*{*/}
+                    {/*    showPosts() ? showPosts() : <Spinner/>*/}
+                    {/*}*/}
+                </div>
+
+                <div
+                    className="flex border border-solid border-black-200 dark:border-gray-300 rounded-lg focus-within:ring-2 ring-amber-500"
                 >
                     <Form
-                        id="search-form" role="search"
+                        id="search-form"
+                        role="search"
                         className="flex w-full"
                         onKeyUp={(e: React.KeyboardEvent<HTMLFormElement>) => {
                             formik.handleSubmit(e)}
@@ -122,16 +157,16 @@ const Nav = () => {
                     >
                         <input
                             type="search"
-                            className="w-full rounded-lg md:rounded-none md:rounded-tl-md md:rounded-bl-md px-2 py-3 text-sm text-gray-50 dark:text-gray-600 focus:outline-none bg-base dark:bg-white"
+                            className="w-full rounded-lg md:rounded-none md:rounded-tl-md md:rounded-bl-md px-2 py-3 text-sm text-gray-50 dark:text-gray-600 focus:outline-none bg-white dark:bg-white"
                             placeholder="Recherche"
                             aria-label="Search posts"
                             name="search"
                             onChange={formik.handleChange}
                             value={formik.values.search}
                         />
-                        <button className="rounded-tr-md rounded-br-md px-2 py-3 hidden md:block bg-base dark:bg-white">
+                        <button className="rounded-tr-md rounded-br-md px-2 py-3 hidden md:block bg-white dark:bg-white">
                             <svg
-                                className="w-4 h-4 fill-gray-50 dark:fill-gray-600"
+                                className="w-4 h-4 fill-gray-600"
                                 fill="currentColor"
                                 viewBox="0 0 20 20"
                                 xmlns="http://www.w3.org/2000/svg"
@@ -148,50 +183,50 @@ const Nav = () => {
 
                 {formik.touched.search && formik.errors.search ? (
                     <div className="flex items-center">
-                                <span className="text-red-500 text-xs italic">
-                                    {formik.errors.search}
-                                </span>
+                        <span className="text-red-500 text-xs italic">
+                            {formik.errors.search}
+                        </span>
                     </div>
                 ) : null}
-
-                <div id="menu" className="flex flex-col space-y-2 mt-5">
-                    <NavLink
-                        to={"/posts"}
-                        className="flex items-center text-sm font-medium text-gray-700 py-2 px-2 hover:bg-amber-500 hover:text-white hover:scale-105 rounded-md transition duration-150 ease-in-out"
-                    >
-                        <span className="w-6 h-6 fill-current inline-block">
-                            <BsSignpostSplit color="black dark:white" size="2em" />
-                        </span>
-                        <span className="ml-4 dark:text-white duration-500">
-                                Posts
-                            </span>
-                    </NavLink>
+                {
+                    theme && theme === 'light'
+                        ? <button
+                            className="flex mx-auto p-2 z-50 items-center justify-center rounded-lg bg-base dark:bg-white w-[30px] h-[30px]"
+                            onClick={toggleTheme} value="light">
+                            <BsFillMoonFill className="z-10" fill="white"/>
+                        </button>
+                        : <button
+                            className="flex mx-auto p-2 z-50 items-center justify-center rounded-lg bg-base dark:bg-white w-[30px] h-[30px]"
+                            onClick={toggleTheme} value="dark">
+                            <BsSun className="z-10" fill="base"/>
+                        </button>
+                }
+                <div
+                    className="mx-auto"
+                >
                     {
-                        showPosts() ? showPosts() : <Spinner/>
+                        !isConnected
+                            ?
+                            <button
+                                onClick={handleLoginClick}
+                                className="bg-tertiary dark:bg-secondary text-base dark:text-white px-3 py-2 rounded-md text-sm font-medium hover:bg-amber-500 transition duration-500 ease-in-out"
+                            >
+                                Connexion
+                            </button>
+                            :
+                            <button
+                                className="text-white bg-secondary dark:bg-tertiary rounded-lg hover:bg-red-400 shadow-lg shadow-gray-200 dark:shadow-gray-900 duration-300"
+                                onClick={handleDisconnectForm}
+                            >
+                                Déconnexion
+                            </button>
                     }
                 </div>
-            </div>
-            <div className="mx-auto pb-10">
-                {
-                    !isConnected
-                        ?
-                        <button
-                            onClick={handleLoginClick}
-                            className="bg-tertiary dark:bg-secondary text-base dark:text-white px-3 py-2 rounded-md text-sm font-medium hover:bg-amber-500 transition duration-500 ease-in-out"
-                        >
-                            Connexion
-                        </button>
-                        :
-                        <button
-                            className="text-white bg-secondary dark:bg-tertiary rounded-lg p-1 hover:bg-red-400 shadow-lg shadow-gray-200 dark:shadow-gray-900 duration-300 p-3"
-                            onClick={handleDisconnectForm}
-                        >
-                            Déconnexion
-                        </button>
 
-                }
-            </div>
-        </div>
+            </section>
+
+
+        </section>
         {showLoginForm  && !isConnected && <HomeForm showLoginForm={showLoginForm} setShowLoginForm={setShowLoginForm}/>}
         </>
     );

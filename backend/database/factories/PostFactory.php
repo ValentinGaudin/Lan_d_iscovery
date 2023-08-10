@@ -19,6 +19,7 @@ class PostFactory extends Factory
     {
         return [
             'title'       => $this->faker->title,
+            'slug'        => $this->faker->slug,
             'description' => $this->faker->realText('70'),
             'is_active'   => $this->faker->boolean,
             'author'      => 1,

@@ -19,10 +19,8 @@ return new class extends Migration
             $table->string('file_alt');
             $table->foreignId('category_id')->nullable()->constrained('categories');
             $table->foreignId('post_id')->nullable()->constrained('posts');
-            $table->foreignId('user_id')->nullable()->constrained('users');
             $table->unique(['file', 'category_id']);
             $table->unique(['file', 'post_id']);
-            $table->unique(['file', 'user_id']);
             $table->timestamps();
         });
     }

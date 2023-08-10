@@ -29,30 +29,6 @@ const Show = () => {
         enabled: Boolean(postId),
     })
 
-    // const mutation = useMutation({
-    //     mutationFn: createPost,
-    //     onSuccess: () => {
-    //         // Invalidate and refetch
-    //         queryClient.invalidateQueries({ queryKey: ['todos'] })
-    //     },
-    // })
-
-    const commentFormik = useFormik({
-        initialValues: {
-            content: '',
-        },
-        validationSchema: Yup.object({
-            content: Yup.string().required('Required'),
-        }),
-        onSubmit: values => {
-            createComment(values.content, postId).then((response: AxiosResponse) => {
-                console.log(response);
-            }).catch((error) => {
-                setError(error.response.data);
-            });
-        },
-    });
-
     const toggleSpeedDial = () => {
         const speedDial = document.querySelector("#speed-dial");
         speedDial?.classList.toggle("hidden");
@@ -97,7 +73,11 @@ const Show = () => {
                                         </div>
                                     </div>
                                     <div className="text-gray-800">
-                                        <p>{data?.description}</p>
+                                        <p
+                                            dangerouslySetInnerHTML={{
+                                            __html: data?.description
+                                        }}>
+                                        </p>
                                     </div>
                                 </div>
                             </div>
@@ -145,13 +125,6 @@ const Show = () => {
                                         </div>
                                     </div>
                                 </div>
-                                <button type="button" data-dial-toggle="speed-dial-menu-dropdown-alternative"
-                                        onClick={toggleSpeedDial}
-                                        aria-controls="speed-dial-menu-dropdown-alternative" aria-expanded="false"
-                                        className="flex items-center justify-center ml-auto text-white bg-blue-700 rounded-full w-14 h-14 hover:bg-blue-800 dark:bg-blue-600 dark:hover:bg-blue-700 focus:ring-4 focus:ring-blue-300 focus:outline-none dark:focus:ring-blue-800">
-                                    <BsVectorPen size="2em"/>
-                                    <span className="sr-only">Open actions menu</span>
-                                </button>
                             </div>
                         </div>
                     </>

@@ -18,7 +18,7 @@ class File extends Model
     ];
 
     /**
-     * @return BelongsTo
+     * @return BelongsTo<Post, File>
      */
     public function posts(): BelongsTo
     {
@@ -26,7 +26,7 @@ class File extends Model
     }
 
     /**
-     * @return BelongsTo
+     * @return BelongsTo<Category, File>
      */
     public function categories(): BelongsTo
     {
