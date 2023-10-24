@@ -37,7 +37,7 @@ jobs:
       - name: "Set application key"
         run: |
           cd backend/
-          cp env.example .env 
+          cp .env.example .env 
           php artisan key:generate"
 
       - name: "Require Laravel Pint"
