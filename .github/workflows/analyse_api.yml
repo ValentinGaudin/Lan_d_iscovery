@@ -38,7 +38,7 @@ jobs:
         run: |
           cd backend/
           cp .env.example .env 
-          php artisan key:generate"
+          php artisan key:generate
 
       - name: "Require Laravel Pint"
         run: "composer require laravel/pint --dev --no-update --no-interaction --no-progress --working-dir=$WORKING_DIR_API"
