@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Casts\Attribute;
+use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
@@ -18,6 +19,7 @@ class User extends Authenticatable
 {
     use HasApiTokens;
     use HasFactory;
+    use HasUuids;
     use Notifiable;
 
     /**
@@ -53,9 +55,9 @@ class User extends Authenticatable
      */
     protected $casts = [
         'email_verified_at' => 'datetime',
-        'created_at'        => 'datetime:d/m/Y',
-        'updated_at'        => 'datetime',
-        'deleted_at'        => 'datetime'
+        'created_at' => 'datetime:d/m/Y',
+        'updated_at' => 'datetime',
+        'deleted_at' => 'datetime',
     ];
 
     /**
@@ -82,7 +84,7 @@ class User extends Authenticatable
     public function fullName(): Attribute
     {
         return Attribute::get(
-            fn () => ucfirst($this->civility) . ' ' . $this->last_name . ' ' . $this->first_name,
+            fn () => ucfirst($this->civility).' '.$this->last_name.' '.$this->first_name,
         );
     }
 }

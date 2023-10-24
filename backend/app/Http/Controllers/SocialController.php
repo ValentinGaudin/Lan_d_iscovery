@@ -11,7 +11,6 @@ class SocialController extends Controller
     /**
      * Redirect the user to the provider authentication page.
      *
-     * @param string $provider
      *
      * @return \Illuminate\Http\RedirectResponse|RedirectResponse
      */
@@ -23,7 +22,6 @@ class SocialController extends Controller
     /**
      * Obtain the user information from the provider.
      *
-     * @param string $provider
      *
      * @return JsonResponse
      */

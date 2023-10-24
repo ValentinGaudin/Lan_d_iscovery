@@ -18,7 +18,7 @@ class Category extends Model
     protected $casts = [
         'updated_at' => 'datetime',
         'created_at' => 'datetime',
-        'deleted_at' => 'datetime'
+        'deleted_at' => 'datetime',
     ];
 
     /**

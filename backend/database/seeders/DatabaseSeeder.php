@@ -8,13 +8,11 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class DatabaseSeeder extends Seeder
 {
-    use WithoutModelEvents;
     use RefreshDatabase;
+    use WithoutModelEvents;
 
     /**
      * Seed the application's database.
-     *
-     * @return void
      */
     public function run(): void
     {
@@ -22,7 +20,7 @@ class DatabaseSeeder extends Seeder
             CategorySeeder::class,
             UserSeeder::class,
             PostSeeder::class,
-            ProjectSeeder::class
+            ProjectSeeder::class,
         ]);
     }
 }

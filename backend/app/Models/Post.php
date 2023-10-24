@@ -7,7 +7,6 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
-use Illuminate\Database\Eloquent\Relations\MorphOne;
 
 class Post extends Model
 {
@@ -20,6 +19,9 @@ class Post extends Model
         'title',
         'description',
         'is_active',
+        'is_featured',
+        'is_premium',
+        'is_sponsored',
     ];
 
     /**
@@ -27,10 +29,15 @@ class Post extends Model
      */
     protected $casts = [
         'is_active' => 'boolean',
+        'is_featured' => 'boolean',
+        'is_premium' => 'boolean',
+        'is_sponsored' => 'boolean',
         'created_at' => 'datetime:d/m/Y',
+        'updated_at' => 'datetime:d/m/Y',
+        'deleted_at' => 'datetime:d/m/Y',
     ];
 
-    protected $with = ['categories', 'users'];
+    protected $with = ['categories'];
 
     /**
      * @return BelongsToMany<Category>

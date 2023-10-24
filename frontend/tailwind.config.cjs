@@ -1,34 +1,37 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-  mode: 'jit',
   content:["./src/**/*.{ts,tsx}"],
   purge: ['./index.html', './src/**/*.{js,ts,jsx,tsx}'],
   darkMode: 'class',
+  corePlugins: {
+    preflight: true,
+  },
   theme: {
     extend: {
       colors: {
         base : {
-          DEFAULT : '#000',
-          light : '#0F1217',
+          DEFAULT : '#0F1217',
         },
         primary: {
+          DEFAULT : '#606C38'
         },
         secondary : {
-          DEFAULT : '#BB3DF1',
+          DEFAULT : '#283618',
         },
         tertiary : {
-          DEFAULT : '#03C988',
+          DEFAULT : '#FEFAE0',
         },
         quaternary : {
-          DEFAULT: '#1F9CEE'
+          DEFAULT: '#DDA15E',
+        },
+        cinque : {
+          DEFAULT : '#BC6C25',
         },
         glow : {
-
+          DEFAULT : '#FFD700',
         },
       }
     },
   },
-  plugins: [
-    require('@tailwindcss/forms'),
-  ],
+
 }

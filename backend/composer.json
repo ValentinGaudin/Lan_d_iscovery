@@ -21,10 +21,13 @@
         "mockery/mockery": "^1.4.4",
         "nunomaduro/collision": "^7.0",
         "nunomaduro/larastan": "^2.6",
+        "pestphp/pest": "^2.24",
+        "pestphp/pest-plugin-faker": "^2.0",
+        "pestphp/pest-plugin-laravel": "^2.2",
+        "pestphp/pest-plugin-livewire": "^2.1",
         "phpstan/phpstan": "^1.9",
         "phpunit/phpunit": "^10.0",
         "spatie/laravel-ignition": "^2.0",
-        "squizlabs/php_codesniffer": "^3.7",
         "thecodingmachine/phpstan-strict-rules": "^1.0"
     },
     "autoload": {
@@ -53,21 +56,19 @@
         "post-create-project-cmd": [
             "@php artisan key:generate --ansi"
         ],
-        "phpstan": [
-            "phpstan analyse --ansi -c ./phpstan.neon --memory-limit=2G"
+        "pint" : [
+            "@php ./vendor/bin/pint"
         ],
-        "phpcs": [
-            "phpcs"
+        "stan": [
+            "@php ./vendor/bin/phpstan analyse --ansi -c ./phpstan.neon --memory-limit=2G"
         ],
-        "phpcbf": [
-            "phpcbf"
+        "pest": [
+            "@php ./vendor/bin/pest"
         ],
-        "phpunit": [
-            "phpunit --colors=always -d memory_limit=2G"
-        ],
-        "test": [
-            "@phpstan",
-            "@phpcs"
+        "clean": [
+            "@pint",
+            "@stan",
+            "@pest"
         ]
     },
     "extra": {
@@ -81,7 +82,8 @@
         "sort-packages": true,
         "allow-plugins": {
             "pestphp/pest-plugin": true,
-            "php-http/discovery": true
+            "php-http/discovery": true,
+            "pixelfear/composer-dist-plugin": true
         }
     },
     "minimum-stability": "stable",

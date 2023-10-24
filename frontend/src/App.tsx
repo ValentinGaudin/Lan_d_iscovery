@@ -1,33 +1,24 @@
-import animation from './Styles/animation.module.css'
-import './App.css';
-import React from "react";
-import ThemeProvider from "./Provider/ThemeProvider";
-import AuthProvider from "./Provider/AuthProvider";
-import MainRoot from "./Routes/MainRoot";
-import {QueryClient, QueryClientProvider} from "@tanstack/react-query";
-import Footer from "./Components/Footer";
+import React from 'react';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+
+import { DefaultTemplate } from '@/components/templates';
+import ThemeProvider from '@/components/organisms/ThemeProvider';
+import AuthProvider from '@/components/organisms/AuthProvider';
 
 const App = () => {
-    const queryClient = new QueryClient()
+	const queryClient = new QueryClient();
 
-    return (
-        <>
-            <main className="bg-white dark:bg-base">
-                <ThemeProvider>
-                    <AuthProvider>
-                        <QueryClientProvider client={queryClient}>
-                            <span className={animation.glow_blue}></span>
-                            <span className={animation.glow_green}></span>
-
-                            <MainRoot/>
-                            <Footer/>
-
-                        </QueryClientProvider>
-                    </AuthProvider>
-                </ThemeProvider>
-            </main>
-        </>
-    )
-}
+	return (
+		<main className="bg-white dark:bg-base">
+			<QueryClientProvider client={queryClient}>
+				<ThemeProvider>
+					<AuthProvider>
+						<DefaultTemplate></DefaultTemplate>
+					</AuthProvider>
+				</ThemeProvider>
+			</QueryClientProvider>
+		</main>
+	);
+};
 
 export default App;

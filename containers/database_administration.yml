@@ -1,8 +1,6 @@
 services:
   database_administration:
     image: phpmyadmin/phpmyadmin:5
-    profiles:
-      - local
     environment:
       PMA_HOSTS: database
     labels:

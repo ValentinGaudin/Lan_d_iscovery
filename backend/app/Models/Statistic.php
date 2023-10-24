@@ -16,12 +16,13 @@ class Statistic extends Model
     ];
 
     protected $casts = [
-        'statistic_id'      => 'integer',
-        'statistic_class'   => 'string',
+        'statistic_id' => 'integer',
+        'statistic_class' => 'string',
     ];
 
     /**
      * Get the parent commentable model (post or video).
+     *
      * @return MorphTo<Model, Statistic>
      */
     public function statistical(): MorphTo

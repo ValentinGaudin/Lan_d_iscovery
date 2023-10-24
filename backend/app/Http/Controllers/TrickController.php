@@ -9,8 +9,6 @@ class TrickController extends Controller
 {
     /**
      * Display a listing of the resource.
-     *
-     * @return void
      */
     public function index(): void
     {
@@ -19,8 +17,6 @@ class TrickController extends Controller
 
     /**
      * Show the form for creating a new resource.
-     *
-     * @return void
      */
     public function create(): void
     {
@@ -29,10 +25,6 @@ class TrickController extends Controller
 
     /**
      * Store a newly created resource in storage.
-     *
-     * @param Request $request
-     *
-     * @return void
      */
     public function store(Request $request): void
     {
@@ -41,10 +33,6 @@ class TrickController extends Controller
 
     /**
      * Display the specified resource.
-     *
-     * @param Trick $trick
-     *
-     * @return void
      */
     public function show(Trick $trick): void
     {
@@ -53,10 +41,6 @@ class TrickController extends Controller
 
     /**
      * Show the form for editing the specified resource.
-     *
-     * @param Trick $trick
-     *
-     * @return void
      */
     public function edit(Trick $trick): void
     {
@@ -65,11 +49,6 @@ class TrickController extends Controller
 
     /**
      * Update the specified resource in storage.
-     *
-     * @param Request $request
-     * @param Trick   $trick
-     *
-     * @return void
      */
     public function update(Request $request, Trick $trick): void
     {
@@ -78,10 +57,6 @@ class TrickController extends Controller
 
     /**
      * Remove the specified resource from storage.
-     *
-     * @param  Trick  $trick
-     *
-     * @return void
      */
     public function destroy(Trick $trick): void
     {

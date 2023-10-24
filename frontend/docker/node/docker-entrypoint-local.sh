@@ -1,8 +1,8 @@
 #!/bin/sh
 set -e
 
-yarn
-yarn dev
+yarn install
+yarn dev --host --port 3000
 
 # Run command with node if the first argument contains a "-" or is not a system command. The last
 # part inside the "{}" is a workaround for the following bug in ash/dash:

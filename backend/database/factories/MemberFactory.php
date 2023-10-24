@@ -21,5 +21,4 @@ class MemberFactory extends Factory
             //
         ];
     }
-
 }

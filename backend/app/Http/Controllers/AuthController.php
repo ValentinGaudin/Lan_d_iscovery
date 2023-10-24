@@ -20,42 +20,42 @@ class AuthController extends Controller
             $validateUser = Validator::make(
                 $request->all(),
                 [
-                    'email'    => 'required|email',
+                    'email' => 'required|email',
                     'password' => 'required|string',
-                //                    'remember' => 'string'
+                    //                    'remember' => 'string'
                 ]
             );
 
             if ($validateUser->fails()) {
                 return response()->json([
-                    'status'  => false,
+                    'status' => false,
                     'message' => 'validation error',
-                    'errors'  => $validateUser->errors()
+                    'errors' => $validateUser->errors(),
                 ], 401);
             }
-            if (!Auth::attempt($request->only(['email', 'password']))) {
+            if (! Auth::attempt($request->only(['email', 'password']))) {
                 return response()->json([
-                    'status'  => false,
-                    'message' => 'Email & Password does not match with our record.'
+                    'status' => false,
+                    'message' => 'Email & Password does not match with our record.',
                 ], 401);
             }
 
             $user = User::query()->where('email', $request->input('email'))->firstOrFail();
 
-            if (!$user instanceof User) {
+            if (! $user instanceof User) {
                 throw new ErrorException('There are no user with this email');
             }
 
             return response()->json([
-                'status'  => true,
+                'status' => true,
                 'message' => 'User Logged In Successfully',
-                'token'   => $user->createToken('auth:api')->plainTextToken,
-                'user'    => new UserResource($user),
+                'token' => $user->createToken('auth:api')->plainTextToken,
+                'user' => new UserResource($user),
             ], 201);
         } catch (Throwable $th) {
             return response()->json([
-                'status'  => false,
-                'message' => $th->getMessage()
+                'status' => false,
+                'message' => $th->getMessage(),
             ], 500);
         }
     }
@@ -73,40 +73,40 @@ class AuthController extends Controller
             $validateUser = Validator::make(
                 $request->all(),
                 [
-                    'name'     => 'required|string',
-                    'email'    => 'required|email|unique:users,email',
+                    'name' => 'required|string',
+                    'email' => 'required|email|unique:users,email',
                     'password' => 'required|string',
                 ]
             );
 
             if ($validateUser->fails()) {
                 return response()->json([
-                    'status'  => false,
+                    'status' => false,
                     'message' => 'validation error',
-                    'errors'  => $validateUser->errors()
+                    'errors' => $validateUser->errors(),
                 ], 401);
             }
 
             $user = User::query()->create([
-                'name'     => $request->input('name'),
-                'email'    => $request->input('email'),
+                'name' => $request->input('name'),
+                'email' => $request->input('email'),
                 'password' => Hash::make($request->string('password')),
             ]);
 
-            if (!$user instanceof User) {
+            if (! $user instanceof User) {
                 throw new ErrorException('There are no user with this email');
             }
 
             return response()->json([
-                'status'  => true,
+                'status' => true,
                 'message' => 'User Registered Successfully',
-                'token'   => $user->createToken('auth:api')->plainTextToken,
-                'user'    => new UserResource($user),
+                'token' => $user->createToken('auth:api')->plainTextToken,
+                'user' => new UserResource($user),
             ], 201);
         } catch (Throwable $th) {
             return response()->json([
-                'status'  => false,
-                'message' => $th->getMessage()
+                'status' => false,
+                'message' => $th->getMessage(),
             ], 500);
         }
     }
@@ -130,6 +130,7 @@ class AuthController extends Controller
         if ($request->user()) {
             return response()->json(new UserResource($request->user()));
         }
+
         return response()->json(null, 401);
     }
 }
