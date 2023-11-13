@@ -26,3 +26,19 @@ services:
     build:
       context: ../backend
       target: backend-cron-local
+
+  backend_vite:
+    image: thecodingmachine/nodejs:v2-18-bullseye
+    volumes:
+      - ../backend:/usr/src/app/:delegated
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.backend_vite.rule=Host(`backend.vite.${DOMAIN}`)
+      - traefik.http.services.backend_vite.loadbalancer.server.port=5173
+    environment:
+      # STARTUP COMMANDS
+      APP_URL: ${HTTP_PROTOCOL}://backend.${DOMAIN}
+      STARTUP_COMMAND_1: yarn
+      STARTUP_COMMAND_2: yarn dev --host
+      VITE_SERVER_HMR_PORT: 80
+      VITE_SERVER_HMR_HOST: backend.vite.${DOMAIN}
